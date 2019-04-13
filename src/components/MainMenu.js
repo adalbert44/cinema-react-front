@@ -14,6 +14,8 @@ class MainMenu extends Component {
             .then(data => this.setState({user:data.user}))
     }
 
+
+
     render() {
 
         console.log(this.state.user)
@@ -48,13 +50,17 @@ class MainMenu extends Component {
     login = () => {
         fetch('http://127.0.0.1:5000/login',
             {method:'POST'})
-        this.setState({user:true})
+        fetch('http://127.0.0.1:5000/getUser')
+            .then(response => response.json())
+            .then(data => this.setState({user:data.user}))
     }
 
     logout = () => {
         fetch('http://127.0.0.1:5000/logout',
             {method:'POST'})
-        this.setState({user:false})
+        fetch('http://127.0.0.1:5000/getUser')
+            .then(response => response.json())
+            .then(data => this.setState({user:data.user}))
     }
 }
 
