@@ -1,14 +1,30 @@
 export default [
     {
         "name":"Terminator",
-        "img":"https://thumbs.dfs.ivi.ru/storage8/contents/b/9/ae2e4ca5a75fa675e50892908124b6.jpg/234x360/"
+        "img":"http://server.megakino.com.ua/uploads/posters/4799_1554206398_afishakinokiev.jpg"
     },
     {
         "name":"Robocop",
-        "img":"https://my-hit.org/storage/290696_500x800x250.jpg"
+        "img":"http://server.megakino.com.ua/uploads/posters/1816_1554723039_2220_1554285963_afishakinokiev.jpg"
+    },
+    {
+        "name":"Robocop",
+        "img":"http://server.megakino.com.ua/uploads/posters/6215_1551265285_afishakinokiev.jpg"
+    },
+    {
+        "name":"Robocop",
+        "img":"http://server.megakino.com.ua/uploads/posters/8357_1554722605_afishakinokiev.jpg"
+    },
+    {
+        "name":"Robocop",
+        "img":"http://server.megakino.com.ua/uploads/posters/9887_1553848611_afishakinokiev.jpg"
     },
     {
         "name":"Strong opex",
-        "img":"https://thumbs.dfs.ivi.ru/storage15/contents/2/2/12b3ecb6892bd2b524c7ffe71be30c.jpg"
+        "img":"http://server.megakino.com.ua/uploads/posters/3588_1552905361_afishakinokiev.jpg"
+    },
+    {
+        "name":"Robocop",
+        "img":"http://server.megakino.com.ua/uploads/posters/5779_1553615197_afishakinokiev.jpg"
     }
 ]
