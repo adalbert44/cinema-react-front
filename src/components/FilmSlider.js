@@ -2,16 +2,16 @@ import React, {Component} from 'react'
 import {Carousel, Container, Col, Row, Media, Image} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import films from "../films";
+import Poster from './Poster'
+
 
 export default class FilmSlider extends Component {
     render() {
         const {images} = this.props;
         const postPerPage = 6;
 
-        const posters = images.map((image, i) =>
-            <div className="col col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <img src={image.img} alt={i + " slide"}/>
-            </div>
+        const posters = images.map((film, i) =>
+                <Poster alt={i + " slide"} filmInfo = {film}></Poster>
         )
 
         let slides = []
@@ -25,11 +25,12 @@ export default class FilmSlider extends Component {
 
             slides.push(
             <Carousel.Item>
-                <div className="container-fluid">
+                <div className="d-flex">
 
-                    <div className="row">
-                        {temp}
-                    </div>
+
+                        <div className="row">
+                            {temp}
+                        </div>
                 </div>
             </Carousel.Item>)
 
