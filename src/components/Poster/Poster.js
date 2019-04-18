@@ -10,30 +10,35 @@ export default class Poster extends PureComponent {
         super(props)
 
         this.state = {
-            isMouseOnImg: false
+            isMouseOnImg:false
         }
     }
 
     render() {
         const {filmInfo} = this.props;
-
+        const describingBody = this.state.isMouseOnImg ?
+            <div className="ContentOnImg">
+                <span className="NameOfFilm">**Название фильма**</span>
+                <span className="DescribingText fadeInUp">***Описание фильма***</span>
+                <button className="DescribingBtn fadeInUp">Подробнее о фильме</button>
+            </div> : <span/>;
 
 
         return(
-            <div className="col col-xs-12 col-sm-6 col-md-4 col-lg-2 my-auto">
+            <div
+                onMouseEnter={this.mouseEnter}
+                onMouseLeave={this.mouseLeave}
+                id="Poster"
+            >
+                {describingBody}
                 <img
                     src={filmInfo.img}
-                    onMouseEnter={this.mouseEnter}
-                    onMouseLeave={this.mouseLeave}
                     alt="img">
                 </img>
-                {this.state.isMouseOnImg ?<p className="fadeInUp" >OPISANIE FILMA</p> : <div/>}
-
 
             </div>
         )
     }
-
     mouseLeave = () => {
         this.setState({
             isMouseOnImg: false

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css'
 import MainMenu from './MainMenu'
-import FilmSlider from "./FilmSlider";
+import FilmSlider from "./FilmSlider/FilmSlider";
 import films from '../films'
 
 class App extends Component {
