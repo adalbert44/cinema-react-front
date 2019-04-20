@@ -7,15 +7,30 @@ import './StyleFilmSlider.css'
 
 
 export default class FilmSlider extends Component {
+    constructor(props) {
+        super(props)
 
+        this.state = {
+            films: []
+        }
+    }
+
+    componentDidMount() {
+        fetch('http://127.0.0.1:5000/get_films')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({films:data})
+            })
+    }
 
     render() {
 
-        const {images} = this.props;
+        const {films} = this.state;
         const postPerPage = 6;
 
 
-        const posters = images.map((film, i) =>
+
+        const posters = films.map((film, i) =>
             <Poster alt={i + " slide"} filmInfo = {film}></Poster>
         )
 

@@ -32,7 +32,7 @@ export default class Poster extends PureComponent {
             >
                 {describingBody}
                 <img
-                    src={filmInfo.img}
+                    src={filmInfo.url_picture}
                     alt="img">
                 </img>
 

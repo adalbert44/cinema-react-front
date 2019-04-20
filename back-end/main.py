@@ -5,7 +5,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 import json
 import sqlite3
-
+from flask_cors import CORS, cross_origin
 
 
 
@@ -23,11 +23,12 @@ cursor.execute("""CREATE TABLE films
 
 
 app = Flask(__name__)
-
+cors = CORS(app)
 
 
 
 @app.route("/ping")
+@cross_origin()
 def hello():
     return "pong"
 
@@ -37,6 +38,7 @@ def hello():
 
 
 @app.route("/get_html")
+@cross_origin()
 def get_html(url):
     responce = urllib.request.urlopen(url)
     return responce.read()
@@ -47,6 +49,7 @@ def get_html(url):
 
 
 @app.route("/parse_more_info")
+@cross_origin()
 def parse_more_info(html):
 
 
@@ -85,6 +88,7 @@ def parse_more_info(html):
 
 
 @app.route("/parse_list_of_film", methods=["GET","POST"])
+@cross_origin()
 def parse_list_of_film(html):
 
 
@@ -131,6 +135,7 @@ def parse_list_of_film(html):
 
 
 @app.route("/clear_films", methods=["GET","POST"])
+@cross_origin()
 def clear_films():
     conn = sqlite3.connect("mydatabase.db")
     cursor = conn.cursor()
@@ -145,6 +150,7 @@ def clear_films():
 
 
 @app.route("/save_films", methods=["GET","POST"])
+@cross_origin()
 def save_films(films):
 
     conn = sqlite3.connect("mydatabase.db")
@@ -167,6 +173,7 @@ def save_films(films):
 
 
 @app.route("/check_db", methods=["GET","POST"])
+@cross_origin()
 def check_db():
     conn = sqlite3.connect("mydatabase.db")
     cursor = conn.cursor()
@@ -189,6 +196,7 @@ def check_db():
 
 
 @app.route("/get_films", methods=["GET","POST"])
+@cross_origin()
 def get_films():
     conn = sqlite3.connect("mydatabase.db")
     cursor = conn.cursor()
@@ -215,6 +223,7 @@ def get_films():
 
 
 @app.route("/parse_sites", methods=["GET","POST"])
+@cross_origin()
 def parse_sites():
 
 
