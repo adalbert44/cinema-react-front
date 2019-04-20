@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask
+from flask  import Flask
 import urllib.request
 from bs4 import BeautifulSoup
 import json

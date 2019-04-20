@@ -3,7 +3,6 @@ import {Carousel, Container, Col, Row, Media, Image} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import './StylePost.css'
 
-
 export default class Poster extends PureComponent {
 
     constructor(props) {
@@ -18,7 +17,7 @@ export default class Poster extends PureComponent {
         const {filmInfo} = this.props;
         const describingBody = this.state.isMouseOnImg ?
             <div className="ContentOnImg">
-                <span className="NameOfFilm">**Название фильма**</span>
+                <span className="NameOfFilm fadeInUp">**Название фильма**</span>
                 <span className="DescribingText fadeInUp">***Описание фильма***</span>
                 <button className="DescribingBtn fadeInUp">Подробнее о фильме</button>
             </div> : <span/>;
