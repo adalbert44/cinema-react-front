@@ -17,8 +17,8 @@ export default class Poster extends PureComponent {
         const {filmInfo} = this.props;
         const describingBody = this.state.isMouseOnImg ?
             <div className="ContentOnImg">
-                <span className="NameOfFilm fadeInUp">**Название фильма**</span>
-                <span className="DescribingText fadeInUp">***Описание фильма***</span>
+                <span className="NameOfFilm fadeInUp">**тут надо посчитать символы и поставить... на что надо**</span>
+                <span className="DescribingText fadeInUp">***Описание фильма Привет  как дела   как погода аззазаа   мне нравятся ноги   твои и глаза Тут надо определить максимальное количество символов и где они заступают на кнопочку поменять на ...***</span>
                 <button className="DescribingBtn fadeInUp">Подробнее о фильме</button>
             </div> : <span/>;
 
