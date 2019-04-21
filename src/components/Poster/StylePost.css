@@ -2,7 +2,7 @@
 img{
     position: relative;
 
-    width: 256px;
+    width: 100%;
     height: 500px;
     z-index: 1;
 }
@@ -39,6 +39,7 @@ img{
 }
 #Poster{
     position: relative;
+    width: 16.66666666%;
 }
 .fadeInUp {
     -webkit-animation-name: fadeInUp;
