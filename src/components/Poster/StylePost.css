@@ -39,6 +39,7 @@ img{
 }
 #Poster{
     position: relative;
+    width: 16.6%;
 }
 .fadeInUp {
     -webkit-animation-name: fadeInUp;
