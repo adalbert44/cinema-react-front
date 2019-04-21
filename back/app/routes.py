@@ -17,6 +17,8 @@ def getCurUserID():
     else:
         print("yes")
 
+    return jsonify({'ID': 1})
+
 
 
 
