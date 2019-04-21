@@ -9,6 +9,15 @@ import json
 import sqlite3
 
 
+@app.route('/getCurUserID', method=["GET"])
+@cross_origin()
+def getCurUserID():
+    if not request.json:
+        print("no")
+    else:
+        print("yes")
+
+
 @app.route('/api/users', methods=["POST", "GET"])
 @cross_origin()
 def new_user():
