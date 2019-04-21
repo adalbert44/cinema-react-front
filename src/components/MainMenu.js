@@ -21,7 +21,7 @@ class MainMenu extends Component {
                     })
                 })
             .then(response => response.json())
-            .then(curUserID => this.setState({isAuthorized:curUserID.ID}))
+            .then(curUserID => this.setState({isAuthorized:curUserID.ID !== -1}))
     }
 
     render() {
