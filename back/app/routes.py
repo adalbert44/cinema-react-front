@@ -1,30 +1,55 @@
 # -*- coding: utf-8 -*-
-
-from flask  import Flask
+from flask import render_template, flash, redirect, url_for, jsonify, abort, g, request
+from app import app, db, auth, cors
+from app.models import User
+from flask_cors import CORS, cross_origin
 import urllib.request
 from bs4 import BeautifulSoup
 import json
 import sqlite3
-from flask_cors import CORS, cross_origin
 
 
+@app.route('/api/users', methods=["POST", "GET"])
+@cross_origin()
+def new_user():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    if username is None or password is None:
+        abort(400)    # missing arguments
+    if User.query.filter_by(username=username).first() is not None:
+        abort(400)    # existing user
+
+    user = User(username=username)
+    user.hash_password(password)
+    db.session.add(user)
+    db.session.commit()
+
+    return (jsonify({'username': user.username}), 201,
+            {'Location': url_for('get_user', id=user.id, _external=True)})
 
 
-'''
-conn = sqlite3.connect("mydatabase.db")  # или :memory: чтобы сохранить в RAM
-cursor = conn.cursor()
-cursor.execute("""CREATE TABLE films
-                  (title text, id integer, url_film text,
-                   url_picture text)
-               """)
-'''
+@app.route('/api/users/<int:id>')
+@cross_origin()
+def get_user(id):
+    user = User.query.get(id)
+    if not user:
+        abort(400)
+    return jsonify({'username': user.username})
 
 
+@app.route('/api/token')
+@cross_origin()
+@auth.login_required
+def get_auth_token():
+    token = g.user.generate_auth_token(600)
+    return jsonify({'token': token.decode('ascii'), 'duration': 600})
 
 
-app = Flask(__name__)
-cors = CORS(app)
-
+@app.route('/api/resource')
+@auth.login_required
+@cross_origin()
+def get_resource():
+    return jsonify({'data': 'Hello, %s!' % g.user.username})
 
 
 @app.route("/ping")
@@ -33,25 +58,19 @@ def hello():
     return "pong"
 
 
-
-
-
-
 @app.route("/get_html")
 @cross_origin()
 def get_html(url):
+    print('uu1')
     responce = urllib.request.urlopen(url)
+    print('uu2')
     return responce.read()
-
-
-
 
 
 
 @app.route("/parse_more_info")
 @cross_origin()
 def parse_more_info(html):
-
 
     soup = BeautifulSoup(html, features="html.parser")
     table = soup.find('div', attrs={'class': 'mov'})
@@ -74,16 +93,7 @@ def parse_more_info(html):
     more_info['discription'] = discription
     '''
 
-
     return more_info
-
-
-
-
-
-
-
-
 
 
 
@@ -91,29 +101,21 @@ def parse_more_info(html):
 @cross_origin()
 def parse_list_of_film(html):
 
-
-    soup = BeautifulSoup(html, features="html.parser")
+    soup = BeautifulSoup(html)
     catalog = soup.find('div', attrs={'class': 'catalog catalog--places', 'id': 'showsResult'})
     items = catalog.find_all("div", attrs={'class': 'cat_item'})
 
     cur_id = 0
     films = []
 
-
     for item in items:
-
         cur_id += 1
-
-
         #if (cur_id > 11):
         #    break
-
-
         id = cur_id
 
         title = item.div.a.attrs["title"]
         url_film = "https://kontramarka.ua" + item.div.a.attrs["href"]
-
 
         more_info = parse_more_info(get_html(url_film))
 
@@ -128,12 +130,6 @@ def parse_list_of_film(html):
 
 
 
-
-
-
-
-
-
 @app.route("/clear_films", methods=["GET","POST"])
 @cross_origin()
 def clear_films():
@@ -142,10 +138,6 @@ def clear_films():
     cursor.execute("DELETE FROM films")
     conn.commit()
     return "ok_clear"
-
-
-
-
 
 
 
@@ -166,12 +158,6 @@ def save_films(films):
 
 
 
-
-
-
-
-
-
 @app.route("/check_db", methods=["GET","POST"])
 @cross_origin()
 def check_db():
@@ -189,15 +175,10 @@ def check_db():
 
 
 
-
-
-
-
-
-
 @app.route("/get_films", methods=["GET","POST"])
 @cross_origin()
 def get_films():
+
     conn = sqlite3.connect("mydatabase.db")
     cursor = conn.cursor()
 
@@ -207,6 +188,7 @@ def get_films():
     rows = cursor.fetchall()
 
     for row in rows:
+
         films.append({
             'title': row[0],
             'id': row[1],
@@ -220,30 +202,17 @@ def get_films():
 
 
 
-
-
 @app.route("/parse_sites", methods=["GET","POST"])
 @cross_origin()
 def parse_sites():
 
-
+    print('start pars')
     url = 'https://kontramarka.ua/ru/cinema'
+
     films = parse_list_of_film(get_html(url))
 
+    print('end parse')
     clear_films()
-    #check_db()
     save_films(films)
 
-    #return json.dumps(all_films)
-
     return "ok_parse"
-
-
-
-
-
-
-
-if __name__ == "__main__":
-    app.run()
-
