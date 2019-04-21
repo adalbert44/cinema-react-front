@@ -9,13 +9,15 @@ import json
 import sqlite3
 
 
-@app.route('/getCurUserID', method=["GET"])
+@app.route('/getCurUserID', methods=["GET", "POST"])
 @cross_origin()
 def getCurUserID():
     if not request.json:
         print("no")
     else:
         print("yes")
+
+
 
 
 @app.route('/api/users', methods=["POST", "GET"])
