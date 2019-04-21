@@ -7,6 +7,22 @@ import urllib.request
 from bs4 import BeautifulSoup
 import json
 import sqlite3
+import jwt
+
+
+def decode_auth_token(auth_token):
+    """
+    Decodes the auth token
+    :param auth_token:
+    :return: integer|string
+    """
+    try:
+        payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'))
+        return payload['ID']
+    except jwt.ExpiredSignatureError:
+        return -1
+    except jwt.InvalidTokenError:
+        return -2
 
 
 @app.route('/getCurUserID', methods=["GET", "POST"])
@@ -16,9 +32,12 @@ def getCurUserID():
         print("no")
     else:
         print("yes")
-
-    return jsonify({'ID': 1})
-
+    token = request.json.get("token")
+    res = decode_auth_token(token)
+    if res != -1 and res != -2 and User.query.filter_by(id=res).first() is not None:
+        return jsonify({'ID': res})
+    else:
+        return jsonify({'ID': -1})
 
 
 
