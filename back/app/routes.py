@@ -8,6 +8,9 @@ from bs4 import BeautifulSoup
 import json
 import sqlite3
 import jwt
+import datetime
+
+
 
 
 def decode_auth_token(auth_token):
@@ -38,6 +41,43 @@ def getCurUserID():
         return jsonify({'ID': res})
     else:
         return jsonify({'ID': -1})
+
+def encode_auth_token(user_id):
+    """
+    Generates the Auth Token
+    :return: string
+    """
+    try:
+        payload = {
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=500),
+            'iat': datetime.datetime.utcnow(),
+            'sub': user_id
+        }
+        return jwt.encode(
+            payload,
+            app.config.get('SECRET_KEY'),
+            algorithm='HS256'
+        )
+    except Exception as e:
+        return "-1"
+
+
+@app.route('/getToken', methods=["GET", "POST"])
+@cross_origin()
+def getToken():
+    username = request.json.get("username")
+    password = request.json.get("password")
+
+    if User.query.filter_by(username=username).first() is None:
+        return jsonify({'token': ''})
+
+    user = User.query.filter_by(username=username).first()
+    if (not user.verify_password(password)):
+        return jsonify({'token': ''})
+
+    return jsonify({'token': encode_auth_token(user.id)})
+
+
 
 
 
