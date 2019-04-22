@@ -26,15 +26,24 @@ class MainMenu extends Component {
 
     render() {
 
-        console.log(this.state)
 
         return(
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <button className="btn-primary btn">Головна сторінка</button>
                     <button className="btn-primary btn">Кошик</button>
-                    <button className="btn-primary btn" onClick={this.login}>війти</button>
-                    <button className="btn-primary btn">реєстрація</button>
+                    {this.state.isAuthorized ? (
+                        <div>
+                            <button className="btn-primary btn">профіль</button>
+                            <button className="btn-primary btn" onClick={this.logout}>вийти</button>
+                        </div>
+                        ): (
+                        <div>
+                            <button className="btn-primary btn" onClick={this.login}>війти</button>
+                            <button className="btn-primary btn">реєстрація</button>
+                        </div>
+                        )
+                    }
                 </nav>
 
             </div>
@@ -43,20 +52,30 @@ class MainMenu extends Component {
 
     login = () => {
 
-    /*
-        fetch('http://127.0.0.1:5000/login',
-            {method:'POST'})
-        fetch('http://127.0.0.1:5000/getUser')
+        fetch("http://127.0.0.1:5000/getToken",
+            {  method: "POST",
+                headers: new Headers({
+                    'content-type': 'application/json'
+                }),
+                body: JSON.stringify({
+                    'username': 'uu',
+                    'password': 'pp'
+                })
+            })
             .then(response => response.json())
-            .then(data => this.setState({user:data.user}))*/
+            .then(data => {
+                localStorage.setItem('userToken', data.token)
+                this.setState({
+                    isAuthorized: 1
+                })
+            })
     }
 
     logout = () => {
-        fetch('http://127.0.0.1:5000/logout',
-            {method:'POST'})
-        fetch('http://127.0.0.1:5000/getUser')
-            .then(response => response.json())
-            .then(data => this.setState({user:data.user}))
+        localStorage.setItem('userToken', '')
+        this.setState({
+            isAuthorized: 0
+        })
     }
 }
 

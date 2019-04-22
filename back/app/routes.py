@@ -31,12 +31,8 @@ def decode_auth_token(auth_token):
 @app.route('/getCurUserID', methods=["GET", "POST"])
 @cross_origin()
 def getCurUserID():
-    if not request.json:
-        print("no")
-    else:
-        print("yes")
     token = request.json.get("token")
-    res = decode_auth_token(token)
+    res = decode_auth_token(token.encode())
     if res != -1 and res != -2 and User.query.filter_by(id=res).first() is not None:
         return jsonify({'ID': res})
     else:
@@ -51,7 +47,7 @@ def encode_auth_token(user_id):
         payload = {
             'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=500),
             'iat': datetime.datetime.utcnow(),
-            'sub': user_id
+            'ID': user_id
         }
         return jwt.encode(
             payload,
@@ -75,7 +71,8 @@ def getToken():
     if (not user.verify_password(password)):
         return jsonify({'token': ''})
 
-    return jsonify({'token': encode_auth_token(user.id)})
+    token = encode_auth_token(user.id)
+    return jsonify({'token': str(token.decode())})
 
 
 
