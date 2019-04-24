@@ -32,8 +32,11 @@ def decode_auth_token(auth_token):
 @cross_origin()
 def getCurUserID():
     token = request.json.get("token")
+    if (token == -1 or token == -2):
+        return jsonify({'ID': -1})
+
     res = decode_auth_token(token.encode())
-    if res != -1 and res != -2 and User.query.filter_by(id=res).first() is not None:
+    if User.query.filter_by(id=res).first() is not None:
         return jsonify({'ID': res})
     else:
         return jsonify({'ID': -1})
