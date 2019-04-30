@@ -1,4 +1,25 @@
 .Posters{
     display: flex;
-    flex-flow: row nowrap;
+    height: 450px;
+}
+
+.slider{
+    display: flex;
+    justify-content: center;
+    height: 450px;
+    width: 100%;
+}
+
+.arrow{
+    margin:0;
+    padding: 0;
+    display: flex;
+}
+
+.carousel-inner{
+    height: 100%;
+}
+
+.carousel-item{
+    height: 100%;
 }

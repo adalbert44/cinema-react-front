@@ -1,0 +1,13 @@
+.merger {
+    height: 100%;
+}
+
+#sliderField {
+    display: flex;
+    align-items: center;
+    height: 93%;
+}
+
+#menuField {
+    height: 7%;
+}
