@@ -10,6 +10,12 @@
     width: 100%;
 }
 
+#Poster{
+    display: flex;
+    width: 400px;
+    height: 450px;
+}
+
 .arrow{
     margin:0;
     padding: 0;
