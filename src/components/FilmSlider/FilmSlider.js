@@ -12,29 +12,29 @@ export default class FilmSlider extends Component {
 
         this.state = {
             films: [],
-            width: window.innerWidth
+            width: window.innerWidth,
+            numberSlide: 0,
         }
     }
-
     componentDidMount() {
         fetch('http://127.0.0.1:5000/get_films')
             .then(response => response.json())
             .then(data => {
                 this.setState({films:data})
             })
-            window.addEventListener("resize", this.resize.bind(this));
-            this.resize();
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
     }
-
     resize() {
         this.setState({width: window.innerWidth});
     }
 
+    slidesLength
     render() {
 
         const films = this.state.films;
-        const postPerPage = Math.max(parseInt((this.state.width - 150) / 400, 10), 1)
         console.log((this.state.width - 150) / 400)
+        const postPerPage = Math.max(parseInt((this.state.width - 150) / 400, 10), 1);
 
         let posters = [];
         if (films !== undefined) {
@@ -42,7 +42,6 @@ export default class FilmSlider extends Component {
                 posters.push(<Poster alt={i + " slide"} filmInfo = {films[i]}></Poster>);
             }
         }
-
 
         let slides = [];
 
@@ -54,9 +53,9 @@ export default class FilmSlider extends Component {
             }
 
             slides.push(
-                        <div className="Posters">
-                            {temp}
-                        </div>)
+                <div className="Posters">
+                    {temp}
+                </div>)
 
             i += postPerPage
             if (i >= posters.length)
@@ -64,15 +63,32 @@ export default class FilmSlider extends Component {
             if (i === 0)
                 break
         }
-
+        this.slidesLength = slides.length;
         return(
             <div className="slider">
-                <button className="arrow" style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>left</button>
-                {slides[0]}
-                <button className="arrow" style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>right</button>
+                <button className="arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - this.state.postPerPage*400) / 2)}}>left</button>
+                    <div>
+                        {slides[this.state.numberSlide]}
+                    </div>
+                <button className="arrow" onClick={this.nextSlide} style={{width: parseInt((this.state.width - this.state.postPerPage*400) / 2)}}>right</button>
             </div>
         )
     }
+    prevSlide = () => {
+        if (this.state.numberSlide >= 1){
+            this.setState({numberSlide: this.state.numberSlide - 1})
+        } else {
+            this.setState({numberSlide: this.slidesLength - 1})
+        }
 
+    }
+
+    nextSlide = () => {
+        if (this.state.numberSlide < this.slidesLength - 1){
+            this.setState({numberSlide: this.state.numberSlide + 1})
+        } else {
+            this.setState({numberSlide: 0})
+        }
+    }
 
 }
