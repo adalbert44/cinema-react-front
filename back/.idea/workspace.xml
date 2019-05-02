@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48cf35ff-4672-4b78-ba4f-2d455eaedf3c" name="Default Changelist" comment="test function">
-      <change afterPath="$PROJECT_DIR$/../public/StyleIndex.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/components/StyleApp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/back.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/back.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/FilmSlider/FilmSlider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/FilmSlider/FilmSlider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/FilmSlider/StyleFilmSlider.css" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/FilmSlider/StyleFilmSlider.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/Poster/Poster.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/Poster/Poster.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/Poster/StylePost.css" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/Poster/StylePost.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,6 +99,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -126,7 +116,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">

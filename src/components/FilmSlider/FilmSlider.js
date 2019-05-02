@@ -66,11 +66,11 @@ export default class FilmSlider extends Component {
         this.slidesLength = slides.length;
         return(
             <div className="slider">
-                <button className="arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - this.state.postPerPage*400) / 2)}}>left</button>
+                <button className="arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>left</button>
                     <div>
                         {slides[this.state.numberSlide]}
                     </div>
-                <button className="arrow" onClick={this.nextSlide} style={{width: parseInt((this.state.width - this.state.postPerPage*400) / 2)}}>right</button>
+                <button className="arrow" onClick={this.nextSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>right</button>
             </div>
         )
     }
