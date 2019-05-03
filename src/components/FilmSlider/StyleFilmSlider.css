@@ -1,6 +1,8 @@
+
 .Posters{
 
     display: flex;
+    position: absolute;
     height: 450px;
 
     -moz-transition: transform 1s;
@@ -23,10 +25,24 @@
     height: 450px;
 }
 
-.arrow{
+.left_arrow{
+    position: absolute;
+    left: 0;
     margin:0;
     padding: 0;
     display: flex;
+    height: 450px;
+    z-index: 1;
+}
+
+.right_arrow{
+    position: absolute;
+    right: 0;
+    margin:0;
+    padding: 0;
+    display: flex;
+    height: 450px;
+    z-index: 1;
 }
 
 .carousel-inner{
@@ -36,3 +52,40 @@
 .carousel-item{
     height: 100%;
 }
+
+
+.example-enter {
+    transform:   translate(-1600px,0);
+
+}
+.example-enter.example-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 3000ms;
+}
+.example-leave {
+    transform:   translate(0,0);
+}
+.example-leave.example-leave-active {
+    transform:   translate(1600px,0);
+    transition-property: transform;
+    transition-duration: 3000ms;
+}
+.example2-enter {
+    transform:   translate(1600px,0);
+
+}
+.example2-enter.example2-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 3000ms;
+}
+.example2-leave {
+    transform:   translate(0,0);
+}
+.example2-leave.example2-leave-active {
+    transform:   translate(-1600px,0);
+    transition-property: transform;
+    transition-duration: 3000ms;
+}
+

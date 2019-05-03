@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import Poster from '../Poster/Poster'
 import './StyleFilmSlider.css'
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 
 export default class FilmSlider extends Component {
@@ -12,7 +13,8 @@ export default class FilmSlider extends Component {
             slides: [],
             posters: [],
             width: window.innerWidth,
-            numberSlide: 0
+            numberSlide: 0,
+            last: 0
         }
     }
 
@@ -57,7 +59,7 @@ export default class FilmSlider extends Component {
                 }
 
                 this.setState({slides:this.getSlides(posters),
-                                     posters: posters})
+                    posters: posters})
             });
         window.addEventListener("resize", this.resize.bind(this));
         this.resize();
@@ -71,31 +73,37 @@ export default class FilmSlider extends Component {
     render() {
 
         const postPerPage = Math.max(parseInt((this.state.width - 150) / 400, 10), 1);
-
+        const curSlide = <div key = {this.state.numberSlide} style = {{position: "absolute", left: parseInt((this.state.width - postPerPage*400) / 2)}}>{this.state.slides[this.state.numberSlide]}</div>
         return(
             <div className="slider">
-                <button className="arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>left</button>
-                <div>
-                    {this.state.slides[this.state.numberSlide]}
-                </div>
-                <button className="arrow" onClick={this.nextSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>right</button>
+                <button className="left_arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>left</button>
+                <ReactCSSTransitionGroup transitionName={this.state.last ? 'example' : 'example2'}>
+                        {curSlide}
+                </ReactCSSTransitionGroup>
+
+                <button className="right_arrow" onClick={this.nextSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>right</button>
             </div>
         )
     }
 
     prevSlide = () => {
         if (this.state.numberSlide >= 1){
-            this.setState({numberSlide: this.state.numberSlide - 1})
+            this.setState({numberSlide: this.state.numberSlide - 1,
+                        last: 0})
         } else {
-            this.setState({numberSlide: this.state.slides.length - 1})
+            this.setState({numberSlide: this.state.slides.length - 1,
+                last: 0
+            })
         }
     };
 
     nextSlide = () => {
         if (this.state.numberSlide < this.state.slides.length - 1){
-            this.setState({numberSlide: (this.state.numberSlide + 1)})
+            this.setState({numberSlide: (this.state.numberSlide + 1),
+            last: 1})
         } else {
-            this.setState({numberSlide: 0})
+            this.setState({numberSlide: 0,
+            last: 1})
         }
     }
 
