@@ -1,4 +1,3 @@
-
 .Posters{
 
     display: flex;
@@ -89,4 +88,3 @@
     transition-property: transform;
     transition-duration: 3000ms;
 }
-

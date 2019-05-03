@@ -78,7 +78,7 @@ export default class FilmSlider extends Component {
             <div className="slider">
                 <button className="left_arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>left</button>
                 <ReactCSSTransitionGroup transitionName={this.state.last ? 'example' : 'example2'}>
-                        {curSlide}
+                    {curSlide}
                 </ReactCSSTransitionGroup>
 
                 <button className="right_arrow" onClick={this.nextSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>right</button>
@@ -89,7 +89,7 @@ export default class FilmSlider extends Component {
     prevSlide = () => {
         if (this.state.numberSlide >= 1){
             this.setState({numberSlide: this.state.numberSlide - 1,
-                        last: 0})
+                last: 0})
         } else {
             this.setState({numberSlide: this.state.slides.length - 1,
                 last: 0
@@ -100,10 +100,10 @@ export default class FilmSlider extends Component {
     nextSlide = () => {
         if (this.state.numberSlide < this.state.slides.length - 1){
             this.setState({numberSlide: (this.state.numberSlide + 1),
-            last: 1})
+                last: 1})
         } else {
             this.setState({numberSlide: 0,
-            last: 1})
+                last: 1})
         }
     }
 
