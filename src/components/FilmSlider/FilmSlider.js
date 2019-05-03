@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import Poster from '../Poster/Poster'
 import './StyleFilmSlider.css'
+import './AnimationStyleFilmSlider.css'
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 
@@ -19,7 +20,7 @@ export default class FilmSlider extends Component {
     }
 
     getSlides = (posters) => {
-        const postPerPage = Math.max(parseInt((this.state.width - 150) / 400, 10), 1);
+        const postPerPage = Math.min(6, Math.max(parseInt((this.state.width - 150) / 400, 10), 1));
 
         let slides = [];
 
@@ -72,12 +73,12 @@ export default class FilmSlider extends Component {
 
     render() {
 
-        const postPerPage = Math.max(parseInt((this.state.width - 150) / 400, 10), 1);
+        const postPerPage = Math.min(6, Math.max(parseInt((this.state.width - 150) / 400, 10), 1));
         const curSlide = <div key = {this.state.numberSlide} style = {{position: "absolute", left: parseInt((this.state.width - postPerPage*400) / 2)}}>{this.state.slides[this.state.numberSlide]}</div>
         return(
             <div className="slider">
                 <button className="left_arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>left</button>
-                <ReactCSSTransitionGroup transitionName={this.state.last ? 'example' : 'example2'}>
+                <ReactCSSTransitionGroup transitionName={(this.state.last ? 'example-right' : 'example-left') + postPerPage}>
                     {curSlide}
                 </ReactCSSTransitionGroup>
 

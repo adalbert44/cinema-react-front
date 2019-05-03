@@ -52,39 +52,3 @@
 .carousel-item{
     height: 100%;
 }
-
-
-.example-enter {
-    transform:   translate(-1600px,0);
-
-}
-.example-enter.example-enter-active {
-    transform:   translate(0,0);
-    transition-property: transform;
-    transition-duration: 3000ms;
-}
-.example-leave {
-    transform:   translate(0,0);
-}
-.example-leave.example-leave-active {
-    transform:   translate(1600px,0);
-    transition-property: transform;
-    transition-duration: 3000ms;
-}
-.example2-enter {
-    transform:   translate(1600px,0);
-
-}
-.example2-enter.example2-enter-active {
-    transform:   translate(0,0);
-    transition-property: transform;
-    transition-duration: 3000ms;
-}
-.example2-leave {
-    transform:   translate(0,0);
-}
-.example2-leave.example2-leave-active {
-    transform:   translate(-1600px,0);
-    transition-property: transform;
-    transition-duration: 3000ms;
-}

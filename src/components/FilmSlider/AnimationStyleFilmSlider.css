@@ -1,0 +1,198 @@
+.example-left1-enter {
+    transform:   translate(-400px,0);
+}
+.example-left1-enter.example-left1-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-left1-leave {
+    transform:   translate(0,0);
+}
+.example-left1-leave.example-left1-leave-active {
+    transform:   translate(400px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right1-enter {
+    transform:   translate(400px,0);
+}
+.example-right1-enter.example-right1-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right1-leave {
+    transform:   translate(0,0);
+}
+.example-right1-leave.example-right1-leave-active {
+    transform:   translate(-400px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+
+.example-left2-enter {
+    transform:   translate(-800px,0);
+}
+.example-left2-enter.example-left2-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-left2-leave {
+    transform:   translate(0,0);
+}
+.example-left2-leave.example-left2-leave-active {
+    transform:   translate(800px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right2-enter {
+    transform:   translate(800px,0);
+}
+.example-right2-enter.example-right2-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right2-leave {
+    transform:   translate(0,0);
+}
+.example-right2-leave.example-right2-leave-active {
+    transform:   translate(-800px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+
+.example-left3-enter {
+    transform:   translate(-1200px,0);
+}
+.example-left3-enter.example-left3-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-left3-leave {
+    transform:   translate(0,0);
+}
+.example-left3-leave.example-left3-leave-active {
+    transform:   translate(1200px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right3-enter {
+    transform:   translate(1200px,0);
+}
+.example-right3-enter.example-right3-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right3-leave {
+    transform:   translate(0,0);
+}
+.example-right3-leave.example-right3-leave-active {
+    transform:   translate(-1200px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+
+.example-left4-enter {
+    transform:   translate(-1600px,0);
+}
+.example-left4-enter.example-left4-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-left4-leave {
+    transform:   translate(0,0);
+}
+.example-left4-leave.example-left4-leave-active {
+    transform:   translate(1600px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right4-enter {
+    transform:   translate(1600px,0);
+}
+.example-right4-enter.example-right4-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right4-leave {
+    transform:   translate(0,0);
+}
+.example-right4-leave.example-right4-leave-active {
+    transform:   translate(-1600px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+
+.example-left5-enter {
+    transform:   translate(-2000px,0);
+}
+.example-left5-enter.example-left5-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-left5-leave {
+    transform:   translate(0,0);
+}
+.example-left5-leave.example-left5-leave-active {
+    transform:   translate(2000px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right5-enter {
+    transform:   translate(2000px,0);
+}
+.example-right5-enter.example-right5-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right5-leave {
+    transform:   translate(0,0);
+}
+.example-right5-leave.example-right5-leave-active {
+    transform:   translate(-2000px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+
+.example-left6-enter {
+    transform:   translate(-2400px,0);
+}
+.example-left6-enter.example-left6-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-left6-leave {
+    transform:   translate(0,0);
+}
+.example-left6-leave.example-left6-leave-active {
+    transform:   translate(2400px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right6-enter {
+    transform:   translate(2400px,0);
+}
+.example-right6-enter.example-right6-enter-active {
+    transform:   translate(0,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+.example-right6-leave {
+    transform:   translate(0,0);
+}
+.example-right6-leave.example-right6-leave-active {
+    transform:   translate(-2400px,0);
+    transition-property: transform;
+    transition-duration: 450ms;
+}
+
