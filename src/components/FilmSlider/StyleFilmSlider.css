@@ -33,6 +33,7 @@
     display: flex;
     height: 450px;
     z-index: 1;
+    background-color: #000515;
 }
 
 .right_arrow{
@@ -43,6 +44,7 @@
     display: flex;
     height: 450px;
     z-index: 1;
+    background-color: #000515;
 }
 
 .carousel-inner{

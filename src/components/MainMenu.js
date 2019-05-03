@@ -29,22 +29,22 @@ class MainMenu extends Component {
 
         return(
             <div>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <span>
                     <button className="btn-primary btn">Головна сторінка</button>
                     <button className="btn-primary btn">Кошик</button>
                     {this.state.isAuthorized ? (
-                        <div>
+                        <span>
                             <button className="btn-primary btn">профіль</button>
                             <button className="btn-primary btn" onClick={this.logout}>вийти</button>
-                        </div>
+                        </span>
                         ): (
-                        <div>
+                        <span>
                             <button className="btn-primary btn" onClick={this.login}>війти</button>
                             <button className="btn-primary btn">реєстрація</button>
-                        </div>
+                        </span>
                         )
                     }
-                </nav>
+                </span>
 
             </div>
         )

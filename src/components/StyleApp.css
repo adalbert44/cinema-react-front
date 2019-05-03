@@ -6,8 +6,10 @@
     display: flex;
     align-items: center;
     height: 93%;
+    background: #ffbf00;
 }
 
 #menuField {
     height: 7%;
+    background: #000515;
 }
