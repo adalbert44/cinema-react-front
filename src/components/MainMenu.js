@@ -35,7 +35,7 @@ class MainMenu extends Component {
                     {this.state.isAuthorized ? (
                         <span>
                             <li> <div>profile</div></li>
-                            <li> <div onClick={this.logout}>exit</div></li>
+                            <li> <div onClick={this.logout}>log out</div></li>
                         </span>
                         ): (
                         <span>
