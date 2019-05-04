@@ -124,6 +124,9 @@ def get_resource():
     return jsonify({'data': 'Hello, %s!' % g.user.username})
 
 
+
+
+
 @app.route("/ping")
 @cross_origin()
 def hello():
@@ -131,17 +134,15 @@ def hello():
 
 
 @app.route("/get_html")
-@cross_origin()
+
 def get_html(url):
-    print('uu1')
     responce = urllib.request.urlopen(url)
-    print('uu2')
     return responce.read()
 
 
 
 @app.route("/parse_more_info")
-@cross_origin()
+
 def parse_more_info(html):
 
     soup = BeautifulSoup(html, features="html.parser")
@@ -152,25 +153,34 @@ def parse_more_info(html):
     url_picture = table.find('img', attrs={'class': 'mov__poster'}).attrs["src"]
     more_info['url_picture'] = url_picture
 
-    '''
-    move_desk = table.find('div', attrs={'class': 'mov__desc'})
-    move_stat = move_desk.find('div', attrs={'mov__stat'})
-    tag_a= move_stat.find('a', attrs={'class': 'btn btn--trailer'})
-    url_trailer = tag_a.attrs["href"]
-    more_info['url_trailer'] = url_trailer
 
-    mov__bottom = move_desk.find('div', attrs={'class': 'mov__bottom'})
-    article = mov__bottom.find('article', attrs={'class': 'mov__text'})
-    discription = article.text
-    more_info['discription'] = discription
-    '''
+    move_desk = table.find('div', attrs={'class': 'mov__desc'})
+
+    try:
+        move_stat = move_desk.find('div', attrs={'mov__stat'})
+        tag_a= move_stat.find('a', attrs={'class': 'btn btn--trailer'})
+        url_trailer = tag_a.attrs["href"]
+        print(url_trailer)
+        more_info['url_trailer'] = url_trailer
+    except:
+        more_info['url_trailer'] = '*'
+
+
+    try:
+        mov_bottom = move_desk.find('div', attrs={'class': 'mov__bottom'})
+        article = mov_bottom.find('article', attrs={'class': 'mov__text'})
+        description = article.text
+        more_info['description'] = description
+    except:
+        more_info['description'] = '*'
+
 
     return more_info
 
 
 
 @app.route("/parse_list_of_film", methods=["GET","POST"])
-@cross_origin()
+
 def parse_list_of_film(html):
 
     soup = BeautifulSoup(html)
@@ -182,7 +192,7 @@ def parse_list_of_film(html):
 
     for item in items:
         cur_id += 1
-        #if (cur_id > 11):
+        #if (cur_id > 1):
         #    break
         id = cur_id
 
@@ -191,11 +201,14 @@ def parse_list_of_film(html):
 
         more_info = parse_more_info(get_html(url_film))
 
+        print(id, title)
         films.append({
             'title': title,
             'id': id,
             'url_film': url_film,
-            'url_picture': more_info['url_picture']
+            'url_picture': more_info['url_picture'],
+            'url_trailer': more_info['url_trailer'],
+            'description': more_info['description']
         })
 
     return films
@@ -203,7 +216,7 @@ def parse_list_of_film(html):
 
 
 @app.route("/clear_films", methods=["GET","POST"])
-@cross_origin()
+
 def clear_films():
     conn = sqlite3.connect("mydatabase.db")
     cursor = conn.cursor()
@@ -214,7 +227,7 @@ def clear_films():
 
 
 @app.route("/save_films", methods=["GET","POST"])
-@cross_origin()
+
 def save_films(films):
 
     conn = sqlite3.connect("mydatabase.db")
@@ -223,15 +236,17 @@ def save_films(films):
     films_db = []
 
     for film in films:
-        films_db.append((film['title'], film['id'], film['url_film'], film['url_picture']))
+        films_db.append((film['title'], film['id'], film['url_film'],
+                         film['url_picture'], film['url_trailer'],
+                         film['description']))
 
-    cursor.executemany("INSERT INTO films VALUES (?,?,?,?)", films_db)
+    cursor.executemany("INSERT INTO films VALUES (?,?,?,?,?,?)", films_db)
     conn.commit()
 
 
 
 @app.route("/check_db", methods=["GET","POST"])
-@cross_origin()
+
 def check_db():
     conn = sqlite3.connect("mydatabase.db")
     cursor = conn.cursor()
@@ -265,7 +280,9 @@ def get_films():
             'title': row[0],
             'id': row[1],
             'url_film': row[2],
-            'url_picture': row[3]
+            'url_picture': row[3],
+            'url_trailer': row[4],
+            'description': row[5]
         })
 
 
@@ -275,17 +292,16 @@ def get_films():
 
 
 @app.route("/parse_sites", methods=["GET","POST"])
-@cross_origin()
+
 def parse_sites():
 
     print('start pars')
-    url = 'https://kontramarka.ua/ru/cinema'
 
+    url = 'https://kontramarka.ua/ru/cinema'
     films = parse_list_of_film(get_html(url))
 
     print('end parse')
     clear_films()
     save_films(films)
-
 
     return "ok_parse"
