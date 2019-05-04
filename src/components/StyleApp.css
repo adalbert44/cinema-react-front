@@ -6,7 +6,11 @@
     display: flex;
     align-items: center;
     height: 93%;
-    background: #ffbf00;
+    background: url(textures/mainPageBackground.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 #menuField {
