@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css'
+import "./StyleMainMenu.css"
 
 class MainMenu extends Component {
 
@@ -28,25 +29,22 @@ class MainMenu extends Component {
 
 
         return(
-            <div>
-                <span>
-                    <button className="btn-primary btn">Головна сторінка</button>
-                    <button className="btn-primary btn">Кошик</button>
+                <ul>
+                    <li style={{float:'left'}}> <div className="main"></div></li>
+                    <li> <div>basket</div></li>
                     {this.state.isAuthorized ? (
                         <span>
-                            <button className="btn-primary btn">профіль</button>
-                            <button className="btn-primary btn" onClick={this.logout}>вийти</button>
+                            <li> <div>profile</div></li>
+                            <li> <div onClick={this.logout}>exit</div></li>
                         </span>
                         ): (
                         <span>
-                            <button className="btn-primary btn" onClick={this.login}>війти</button>
-                            <button className="btn-primary btn">реєстрація</button>
+                            <li> <div onClick={this.login}>log in</div></li>
+                            <li> <div>sign up</div></li>
                         </span>
                         )
                     }
-                </span>
-
-            </div>
+                </ul>
         )
     }
 

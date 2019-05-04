@@ -68,7 +68,8 @@ export default class FilmSlider extends Component {
 
     resize() {
         this.setState({width: window.innerWidth});
-        this.setState({slides:this.getSlides(this.state.posters)});
+        this.setState({slides:this.getSlides(this.state.posters),
+        numberSlide: 0});
     }
 
     render() {

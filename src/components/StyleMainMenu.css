@@ -1,0 +1,44 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+
+}
+
+li {
+    height: 100%;
+    display: table;
+    float: right;
+}
+
+li div {
+
+    display: table-cell;
+    height: 100%;
+
+
+    color: #FF9E26;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;;
+    text-align: center;
+    vertical-align: middle;
+    padding: 7px 16px 7px 16px;
+
+    text-decoration: none;
+}
+
+li div:hover:not(.main) {
+    background-color: #001233;
+    cursor: pointer;
+}
+
+li .main:hover {
+    cursor: pointer;
+}
+
+.main {
+    content:url('textures/logo.png');
+}
+
