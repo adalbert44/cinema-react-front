@@ -6,7 +6,6 @@ img{
     height: 370px;
     z-index: 1;
     margin-top: 40px;
-    margin-down: 40px;
     margin-left: 30px;
     margin-right: 30px;
 
@@ -96,7 +95,7 @@ img{
 #Poster{
     position: relative;
     width: 100%;
-    background: #000515;
+    background-image: url(textures/posterBackground.png);
 }
 .fadeInUp {
     -webkit-animation-name: fadeInUp;
@@ -109,8 +108,7 @@ img{
 @-webkit-keyframes fadeInUp {
     0% {
         opacity: 0;
-        -webkit-transform: translate3d(0, 100%, 0);
-        transform: translate3d(0, 100%, 0);
+
     }
     100% {
         opacity: 1;
@@ -121,8 +119,7 @@ img{
 @keyframes fadeInUp {
     0% {
         opacity: 0;
-        -webkit-transform: translate3d(0, 100%, 0);
-        transform: translate3d(0, 100%, 0);
+
     }
     100% {
         opacity: 1;
