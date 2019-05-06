@@ -1,6 +1,12 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css'
 import "./StyleMainMenu.css"
+import logo from "./textures/logo.png"
+import basket from "./textures/noun_basket_129154.png"
+import log_out from "./textures/noun_Exit_1680412.png"
+import log_in from "./textures/noun_log in_1680411.png"
+import profile from "./textures/noun_profile_736746.png"
+import sign_up from "./textures/noun_Sign Up_736746.png"
 
 class MainMenu extends Component {
 
@@ -30,20 +36,21 @@ class MainMenu extends Component {
 
         return(
                 <ul>
-                    <li style={{float:'left'}}> <div className="main"></div></li>
-                    <li> <div>basket</div></li>
+                    <li style={{float:'left', width: "100px"}} > <img className="main" alt="tutu" src={logo}/></li>
                     {this.state.isAuthorized ? (
                         <span>
-                            <li> <div>profile</div></li>
-                            <li> <div onClick={this.logout}>log out</div></li>
+                            <li onClick={this.logout}> <img alt="tutu" src={log_out}/></li>
+                            <li> <img alt="tutu" src={profile}/></li>
                         </span>
                         ): (
                         <span>
-                            <li> <div onClick={this.login}>log in</div></li>
-                            <li> <div>sign up</div></li>
+                            <li onClick={this.login}> <img alt="tutu" src={log_in}/></li>
+                            <li> <img alt="tutu" src={sign_up}/></li>
                         </span>
                         )
                     }
+                    <li> <img alt="tutu" src={basket}/></li>
+
                 </ul>
         )
     }

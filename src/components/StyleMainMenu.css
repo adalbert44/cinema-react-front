@@ -9,36 +9,60 @@ ul {
 
 li {
     height: 100%;
+    width: 65px;
     display: table;
     float: right;
 }
 
-li div {
-
-    display: table-cell;
-    height: 100%;
-
-
-    color: #FF9E26;
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;;
-    text-align: center;
-    vertical-align: middle;
-    padding: 7px 16px 7px 16px;
-
-    text-decoration: none;
-}
-
-li div:hover:not(.main) {
-    background-color: #001233;
-    cursor: pointer;
-}
-
-li .main:hover {
-    cursor: pointer;
-}
-
 .main {
-    content:url('textures/logo.png');
+    height: 55px;
+    width: 90px;
+    margin:5px;
+}
+
+li img {
+    border-radius: 0;
+    height: 38px;
+    width: 60px;
+    margin:11px 5px 11px 5px;
+}
+
+li div {
+    display: table-cell;
+    height: 80%;
+    width: 80%;
+    padding:0;
+}
+
+
+li:hover {
+    background-color: #002253;
+    cursor: pointer;
+}
+
+
+.basket {
+    background:url('textures/noun_basket_129154.png') no-repeat;
+    background-size: 100%;
+}
+
+.log-in {
+    background:url('textures/noun_log in_1680411.png') no-repeat;
+    background-size: 100%;
+}
+
+.log-out {
+    background:url('textures/noun_Exit_1680412.png') no-repeat;
+    background-size: 100%;
+}
+
+.sign-up {
+    background:url('textures/noun_Sign Up_736746.png') no-repeat;
+    background-size: 100%;
+}
+
+.profile {
+    background:url('textures/noun_profile_736746.png') no-repeat;
+    background-size: 100%;
 }
 
