@@ -1,0 +1,49 @@
+.modal-window{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+
+}
+
+.dark-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: black;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+
+}
+
+form {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    /* центрирование */
+
+    margin: auto;
+    /* центрирование */
+
+    height: 300px;
+    width: 500px;
+
+    background: white no-repeat;
+}
+
+.submit-button {
+    position: absolute;
+    bottom: 20px;
+    left: 200px;
+    width: 100px;
+    height: 50px;
+
+    border-radius: 8px;
+    z-index: 2;
+}

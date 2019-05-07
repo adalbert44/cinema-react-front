@@ -78,9 +78,6 @@ def getToken():
     return jsonify({'token': str(token.decode())})
 
 
-
-
-
 @app.route('/api/users', methods=["POST", "GET"])
 @cross_origin()
 def new_user():
