@@ -6,6 +6,40 @@ from itsdangerous import (TimedJSONWebSignatureSerializer
 from app import app, auth
 from flask import g
 
+
+
+class AAA(db.Model):
+    __tablename__ = 'aaas'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32), index=True)
+
+    def get_name(self):
+        return self.name
+
+    def get_id(self):
+        return self.id
+
+
+class Film(db.Model):
+    __tablename__ = 'films'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(32), index=True)
+    url_picture = db.Column(db.String(100), index=True)
+    url_trailer = db.Column(db.String(100), index=True)
+    description = db.Column(db.String(1000), index=True)
+
+    def get_id(self):
+        return self.id
+    def get_title(self):
+        return self.title
+    def get_url_picture(self):
+        return self.url_picture
+    def get_url_trailer(self):
+        return self.url_trailer
+    def get_description(self):
+        return self.description
+
+
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -48,3 +82,5 @@ def verify_password(username_or_token, password):
             return False
     g.user = user
     return True
+
+

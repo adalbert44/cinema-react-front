@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect, url_for, jsonify, abort, g, request
 from app import app, db, auth, cors
-from app.models import User
+from app.models import User, AAA, Film
 from flask_cors import CORS, cross_origin
 import urllib.request
 from bs4 import BeautifulSoup
 import json
-import sqlite3
 import jwt
 import datetime
+from fuzzywuzzy import fuzz
+from transliterate import translit
+
 
 
 
@@ -131,15 +133,12 @@ def hello():
 
 
 @app.route("/get_html")
-
 def get_html(url):
     responce = urllib.request.urlopen(url)
     return responce.read()
 
 
-
 @app.route("/parse_more_info")
-
 def parse_more_info(html):
 
     soup = BeautifulSoup(html, features="html.parser")
@@ -177,7 +176,6 @@ def parse_more_info(html):
 
 
 @app.route("/parse_list_of_film", methods=["GET","POST"])
-
 def parse_list_of_film(html):
 
     soup = BeautifulSoup(html)
@@ -213,92 +211,85 @@ def parse_list_of_film(html):
 
 
 @app.route("/clear_films", methods=["GET","POST"])
-
 def clear_films():
-    conn = sqlite3.connect("mydatabase.db")
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM films")
-    conn.commit()
-    return "ok_clear"
+    db.session.query(Film).delete()
+    db.session.commit()
+    return 'ok_clear_films'
 
 
 
-@app.route("/save_films", methods=["GET","POST"])
 
-def save_films(films):
-
-    conn = sqlite3.connect("mydatabase.db")
-    cursor = conn.cursor()
-
-    films_db = []
-
-    for film in films:
-        films_db.append((film['title'], film['id'], film['url_film'],
-                         film['url_picture'], film['url_trailer'],
-                         film['description']))
-
-    cursor.executemany("INSERT INTO films VALUES (?,?,?,?,?,?)", films_db)
-    conn.commit()
+@app.route("/add_films", methods=["GET","POST"])
+def add_films(lst_films):
 
 
+    for item in lst_films:
+        films = Film.query.all()
 
-@app.route("/check_db", methods=["GET","POST"])
+        tr_item = translit(item['title'], "ru")
+        id = 0
+        new_film = True
+        for film in films:
+            tr_film = translit(film.get_title(), "ru")
+            score = fuzz.token_sort_ratio(tr_item, tr_film)
+            if score >= 75:
+                id = film.get_id()
+                new_film = False
+                break
 
-def check_db():
-    conn = sqlite3.connect("mydatabase.db")
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT * FROM films")
-    rows = cursor.fetchall()
-
-    for row in rows:
-        print(row)
-
-    return "ok_check"
-
-
+        if new_film:
+            f = Film(title = item['title'],
+                     url_picture = item['url_picture'],
+                     url_trailer = item['url_trailer'],
+                     description = item['description']
+                     )
+            id = f.get_id()
+            db.session.add(f)
+            db.session.commit()
+        #update_session for film with ID
 
 
 @app.route("/get_films", methods=["GET","POST"])
 @cross_origin()
 def get_films():
 
-    conn = sqlite3.connect("mydatabase.db")
-    cursor = conn.cursor()
+    films = Film.query.all()
+    ans_list = []
+    for film in films:
 
-    films = []
-
-    cursor.execute("SELECT * FROM films")
-    rows = cursor.fetchall()
-
-    for row in rows:
-
-        films.append({
-            'title': row[0],
-            'id': row[1],
-            'url_film': row[2],
-            'url_picture': row[3],
-            'url_trailer': row[4],
-            'description': row[5]
+        ans_list.append({
+            'title': film.get_title(),
+            'id': film.get_id(),
+            'url_picture': film.get_url_picture(),
+            'url_trailer': film.get_url_trailer(),
+            'description': film.get_description()
         })
 
-
-    return json.dumps(films)
-
-
+    return json.dumps(ans_list)
 
 
 @app.route("/parse_sites", methods=["GET","POST"])
-
 def parse_sites():
 
     print('start pars')
 
-    url = 'https://kontramarka.ua/ru/cinema'
-    films = parse_list_of_film(get_html(url))
+    clear_films()
+
+    url_1 = 'https://kontramarka.ua/ru/cinema'
+    films_1 = parse_list_of_film(get_html(url_1))
+    print('try add new films')
+    add_films(films_1)
+
+    '''
+    url_2
+    films_2
+    
+    add_films(films_2)
+    
+    ...
+    ...
+    ...
+    '''
 
     print('end parse')
-    clear_films()
-    save_films(films)
-
     return "ok_parse"
