@@ -8,16 +8,34 @@ from flask import g
 
 
 
-class AAA(db.Model):
-    __tablename__ = 'aaas'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32), index=True)
 
-    def get_name(self):
-        return self.name
+class Session(db.Model):
+    __tablename__ = 'sessions'
+    id = db.Column(db.Integer, primary_key=True)
+    title_film = db.Column(db.String(32), index=True)
+    title_cinema = db.Column(db.String(50), index=True)
+    location = db.Column(db.String(50), index=True)
+    date = db.Column(db.String(32), index=True)
+    time = db.Column(db.String(32), index=True)
+    price = db.Column(db.String(32), index=True)
+    tag = db.Column(db.String(10), index=True)
 
     def get_id(self):
         return self.id
+    def get_title_film(self):
+        return self.title_film
+    def get_title_cinema(self):
+        return self.title_cinema
+    def get_location(self):
+        return self.location
+    def get_date(self):
+        return self.date
+    def get_time(self):
+        return self.time
+    def get_price(self):
+        return self.price
+    def get_tag(self):
+        return self.tag
 
 
 class Film(db.Model):

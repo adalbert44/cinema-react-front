@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect, url_for, jsonify, abort, g, request
 from app import app, db, auth, cors
-from app.models import User, AAA, Film
+from app.models import User, Film, Session
 from flask_cors import CORS, cross_origin
 import urllib.request
 from bs4 import BeautifulSoup
@@ -10,7 +10,7 @@ import jwt
 import datetime
 from fuzzywuzzy import fuzz
 from transliterate import translit
-
+import re
 
 
 
@@ -139,16 +139,18 @@ def get_html(url):
 
 
 @app.route("/parse_more_info")
-def parse_more_info(html):
+def parse_more_info_kontra(html):
 
     soup = BeautifulSoup(html, features="html.parser")
     table = soup.find('div', attrs={'class': 'mov'})
 
     more_info = {}
 
-    url_picture = table.find('img', attrs={'class': 'mov__poster'}).attrs["src"]
-    more_info['url_picture'] = url_picture
-
+    try:
+        url_picture = table.find('img', attrs={'class': 'mov__poster'}).attrs["src"]
+        more_info['url_picture'] = url_picture
+    except:
+        more_info['url_picture'] = '*'
 
     move_desk = table.find('div', attrs={'class': 'mov__desc'})
 
@@ -171,12 +173,56 @@ def parse_more_info(html):
         more_info['description'] = '*'
 
 
+    try:
+
+        wrap = soup.find('div', attrs={'class': '_wrap', 'id': 'buy-ticket'})
+        sessions_table = wrap.find('div', attrs={'class': 'sessions'})
+        cinema_table = sessions_table.find_all('div', attrs={'class': 'cinema cinemaBlock'})
+
+        #more_info['sessions']
+        sessions_list = []
+        for cinema in cinema_table:
+            cinema_info = cinema.find('div', attrs={'class': 'cinema__name'})
+            cinema_name = cinema_info.div.text
+            location = cinema_info.p.text
+            print(cinema_name)
+            cinema_schedule = cinema.find('div', attrs={'class': 'cinema__schedule'})
+
+            days = cinema_schedule.findChildren('div', recursive=False)
+
+            for day in days:
+                #date = day.attrs['class'][1][11:] DD:MM:YYYY
+                date = day.find('div', attrs={'class': 'spoiler__head active'}).span.text.strip()
+
+                spoiler_body = day.find('div', attrs={'class': 'spoiler__body'})
+                time_table = spoiler_body.findChildren('div', recursive=False)
+
+                for tt in time_table:
+                    time = tt.a.span.text
+
+                    price = tt.find_all()[2].text.strip()
+                    price = re.sub(r'\s+', ' ', price)
+                    price = price.strip('.')
+
+                    sessions_list.append({
+                        'title_cinema': cinema_name,
+                        'location': location,
+                        'date': date,
+                        'time': time,
+                        'price': price
+                    })
+        more_info['sessions'] = sessions_list
+
+    except:
+        more_info['sessions'] = '*'
+
+
     return more_info
 
 
 
-@app.route("/parse_list_of_film", methods=["GET","POST"])
-def parse_list_of_film(html):
+@app.route("/parse_kontra", methods=["GET","POST"])
+def parse_kontra(html):
 
     soup = BeautifulSoup(html)
     catalog = soup.find('div', attrs={'class': 'catalog catalog--places', 'id': 'showsResult'})
@@ -193,17 +239,17 @@ def parse_list_of_film(html):
 
         title = item.div.a.attrs["title"]
         url_film = "https://kontramarka.ua" + item.div.a.attrs["href"]
-
-        more_info = parse_more_info(get_html(url_film))
-
         print(id, title)
+        more_info = parse_more_info_kontra(get_html(url_film))
+
         films.append({
             'title': title,
             'id': id,
             'url_film': url_film,
             'url_picture': more_info['url_picture'],
             'url_trailer': more_info['url_trailer'],
-            'description': more_info['description']
+            'description': more_info['description'],
+            'sessions_list': more_info['sessions']
         })
 
     return films
@@ -216,8 +262,91 @@ def clear_films():
     db.session.commit()
     return 'ok_clear_films'
 
+@app.route("/clear_sessions", methods=["GET","POST"])
+def clear_sessions():
+    db.session.query(Session).delete()
+    db.session.commit()
+    return 'ok_clear_sessions'
 
 
+@app.route("/get_sessions", methods=["GET","POST"])
+def get_sessions():
+    sessions = Session.query.all()
+    sessions_list = []
+    kol = 0
+    for session in sessions:
+        sessions_list.append({
+            'id': session.get_id(),
+            'title_film': session.get_title_film(),
+            'title_cinema': session.get_title_cinema(),
+            'location': session.get_location(),
+            'date': session.get_date(),
+            'time': session.get_time(),
+            'price': session.get_price(),
+            'tag': session.get_tag()
+        })
+
+    return json.dumps(sessions_list)
+
+
+@app.route("/update_sessions", methods=["GET","POST"])
+def update_sessions(film):
+
+    sessions_list = film['sessions_list']
+
+    kol = 0
+    for item in sessions_list:
+        title_film, title_cinema, location, date, time, price, tag0 = '','','','','','',''
+        kol += 1
+        print(kol, end = ' ')
+        if(kol % 20 == 0):
+            print()
+
+        try:
+            title_film = film['title']
+        except:
+            title_film = '*'
+
+        try:
+            title_cinema = item['title_cinema']
+        except:
+            title_cinema = '*'
+
+        try:
+            location = item['location']
+        except:
+            location = '*'
+
+        try:
+            date = item['date']
+        except:
+            date = '*'
+
+        try:
+            time = item['time']
+        except:
+            time = '*'
+
+        try:
+            price = item['price']
+        except:
+            price = '*'
+
+        try:
+            tag = item['tag']
+        except:
+            tag = '*'
+
+        session = Session(title_film = title_film,
+                          title_cinema = title_cinema,
+                          location = location,
+                          date = date,
+                          time = time,
+                          price = price,
+                          tag = tag)
+        db.session.add(session)
+        db.session.commit()
+        print()
 
 @app.route("/add_films", methods=["GET","POST"])
 def add_films(lst_films):
@@ -238,6 +367,7 @@ def add_films(lst_films):
                 break
 
         if new_film:
+
             f = Film(title = item['title'],
                      url_picture = item['url_picture'],
                      url_trailer = item['url_trailer'],
@@ -246,7 +376,14 @@ def add_films(lst_films):
             id = f.get_id()
             db.session.add(f)
             db.session.commit()
-        #update_session for film with ID
+
+
+        update_sessions(item)
+        print('@@@')
+        print('@@@')
+        print('@@@')
+        print('@@@')
+        print('@@@')
 
 
 @app.route("/get_films", methods=["GET","POST"])
@@ -262,7 +399,8 @@ def get_films():
             'id': film.get_id(),
             'url_picture': film.get_url_picture(),
             'url_trailer': film.get_url_trailer(),
-            'description': film.get_description()
+            'description': film.get_description(),
+            #'sessions': get sessions by film-title
         })
 
     return json.dumps(ans_list)
@@ -274,9 +412,10 @@ def parse_sites():
     print('start pars')
 
     clear_films()
+    clear_sessions()
 
     url_1 = 'https://kontramarka.ua/ru/cinema'
-    films_1 = parse_list_of_film(get_html(url_1))
+    films_1 = parse_kontra(get_html(url_1))
     print('try add new films')
     add_films(films_1)
 
