@@ -269,24 +269,32 @@ def clear_sessions():
     return 'ok_clear_sessions'
 
 
-@app.route("/get_sessions", methods=["GET","POST"])
-def get_sessions():
+
+@app.route("/get_sessions_by_title", methods=["GET","POST"])
+def get_sessions_by_title(title):
     sessions = Session.query.all()
     sessions_list = []
-    kol = 0
+    tr_title = translit(title, "ru")
+
+
     for session in sessions:
-        sessions_list.append({
-            'id': session.get_id(),
-            'title_film': session.get_title_film(),
-            'title_cinema': session.get_title_cinema(),
-            'location': session.get_location(),
-            'date': session.get_date(),
-            'time': session.get_time(),
-            'price': session.get_price(),
-            'tag': session.get_tag()
+
+        tr_session = translit(session.get_title_film(), "ru")
+        score = fuzz.token_sort_ratio(tr_title, tr_session)
+        if (score >= 75):
+            sessions_list.append({
+                'id': session.get_id(),
+                'title_film': session.get_title_film(),
+                'title_cinema': session.get_title_cinema(),
+                'location': session.get_location(),
+                'date': session.get_date(),
+                'time': session.get_time(),
+                'price': session.get_price(),
+                'tag': session.get_tag()
         })
 
-    return json.dumps(sessions_list)
+    return sessions_list
+
 
 
 @app.route("/update_sessions", methods=["GET","POST"])
@@ -400,7 +408,7 @@ def get_films():
             'url_picture': film.get_url_picture(),
             'url_trailer': film.get_url_trailer(),
             'description': film.get_description(),
-            #'sessions': get sessions by film-title
+            'sessions': get_sessions_by_title(film.get_title())
         })
 
     return json.dumps(ans_list)
