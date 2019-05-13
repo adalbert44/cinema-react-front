@@ -1,11 +1,23 @@
-import {LOG_IN, LOG_OUT, START_LOGIN, END_LOGIN} from '../constans'
+import {LOG_IN, LOG_OUT, START_LOGIN, END_LOGIN, START_SIGN_UP, END_SIGN_UP} from '../constans'
 
 export const startLogIn = () => {
     return {type: START_LOGIN};
 };
 
+export const startSignUp = () => {
+    return {type: START_SIGN_UP};
+};
+
 export const endLogIn = () => {
     return {type: END_LOGIN};
+};
+
+export const endSignUp = () => {
+    return {type: END_SIGN_UP};
+};
+
+export const signUp = () => {
+
 };
 
 export const checkLogin = () => {

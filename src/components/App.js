@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import MainMenu from './MainMenu'
 import FilmSlider from "./FilmSlider/FilmSlider";
 import LoginForm from "./LoginForm/LoginForm";
+import SignUpForm from "./SignUpForm/SignUpForm"
 import "./StyleApp.css"
 import {connect, Provider} from "react-redux";
 import store from '../store'
@@ -27,7 +28,8 @@ class App extends Component {
                 <div id = "sliderField">
                     <FilmSlider/>
                 </div>
-                {this.props.loginStarted && <LoginForm/>}
+                {this.props.logInStarted && <LoginForm/>}
+                {this.props.signUpStarted && <SignUpForm/>}
             </div>
         )
     }
@@ -36,7 +38,8 @@ class App extends Component {
 function mapStateToProps(state) {
     return {
         isAuthorized: state.authorization.isAuthorized,
-        loginStarted: state.modalWindow.loginStarted
+        logInStarted: state.logInWindow.loginStarted,
+        signUpStarted: state.signUpWindow.signUpStarted
     }
 }
 

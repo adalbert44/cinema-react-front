@@ -1,10 +1,12 @@
 import {combineReducers} from "redux"
 import authorizationReducer from "./authorizationReducer";
-import modalWindowReducer from "./modalWindowReducer";
+import signUpReducer from "./signUpReducer"
+import logInReducer from "./logInReducer";
 
 
 
 export default combineReducers({
     authorization: authorizationReducer,
-    modalWindow: modalWindowReducer
+    logInWindow: logInReducer,
+    signUpWindow: signUpReducer
 });

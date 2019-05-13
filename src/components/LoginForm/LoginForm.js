@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react'
 import './StyleLoginForm.css'
 import {connect} from "react-redux";
 import {logIn, endLogIn} from "../../actions/todoActions";
-import {END_LOGIN, LOG_IN} from "../../constans";
 
 class LoginForm extends PureComponent {
     constructor (props){

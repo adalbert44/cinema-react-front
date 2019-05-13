@@ -8,7 +8,7 @@ import log_in from "./textures/noun_log in_1680411.png"
 import profile from "./textures/noun_profile_736746.png"
 import sign_up from "./textures/noun_Sign Up_736746.png"
 import {connect} from "react-redux"
-import {checkLogin, startLogIn, logOut} from '../actions/todoActions'
+import {checkLogin, startLogIn, logOut, startSignUp} from '../actions/todoActions'
 
 class MainMenu extends Component {
 
@@ -27,13 +27,13 @@ class MainMenu extends Component {
                 <li style={{float: 'left', width: "100px"}}><img className="main" alt="tutu" src={logo}/></li>
                 {this.props.isAuthorized ? (
                     <span>
-                            <li onClick={this.logout}> <img alt="tutu" src={log_out}/></li>
+                            <li onClick={this.props.logOut}> <img alt="tutu" src={log_out}/></li>
                             <li> <img alt="tutu" src={profile}/></li>
                         </span>
                 ) : (
                     <span>
-                            <li onClick={this.login}> <img alt="tutu" src={log_in}/></li>
-                            <li> <img alt="tutu" src={sign_up}/></li>
+                            <li onClick={this.props.startLogIn}> <img alt="tutu" src={log_in}/></li>
+                            <li> <img alt="tutu" onClick={this.props.startSignUp} src={sign_up}/></li>
                         </span>
                 )
                 }
@@ -42,18 +42,6 @@ class MainMenu extends Component {
             </ul>
 
         )
-    }
-
-    login = () => {
-
-        if (this.props.isAuthorized===0)
-            this.props.startLogIn();
-    };
-
-    logout = () => {
-
-        if (this.props.isAuthorized===1)
-            this.props.logOut();
     }
 }
 
@@ -67,6 +55,9 @@ function mapDispatchProps(dispatch) {
     return {
         startLogIn: () => {
             dispatch(startLogIn());
+        },
+        startSignUp: () => {
+            dispatch(startSignUp());
         },
         logOut: () => {
             dispatch(logOut());
