@@ -36,7 +36,7 @@
     height: 450px;
     z-index: 1;
     background-color: #000515;
-    background-image: url(textures/left_arow.png);
+    background-image: url(/../textures/left_arow.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -51,7 +51,7 @@
     height: 450px;
     z-index: 1;
     background-color: #000515;
-    background-image: url(textures/right_arow.png);
+    background-image: url(/../textures/right_arow.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
