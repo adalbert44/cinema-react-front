@@ -80,23 +80,26 @@ def getToken():
     return jsonify({'token': str(token.decode())})
 
 
-@app.route('/api/users', methods=["POST", "GET"])
+@app.route('/sign_up', methods=["POST", "GET"])
 @cross_origin()
-def new_user():
+def sign_up():
     username = request.json.get('username')
     password = request.json.get('password')
-    if username is None or password is None:
-        abort(400)    # missing arguments
-    if User.query.filter_by(username=username).first() is not None:
-        abort(400)    # existing user
+    email = request.json.get('email')
 
-    user = User(username=username)
+    print(email)
+
+    if User.query.filter_by(username=username).first() is not None:
+        return jsonify({'status': 'ERROR', 'error': 'This login is already taken'})   # existing user
+    if User.query.filter_by(email=email).first() is not None:
+        return jsonify({'status': 'ERROR', 'error': 'This e-mail is already taken'})    # existing user
+
+    user = User(username=username, email=email)
     user.hash_password(password)
     db.session.add(user)
     db.session.commit()
 
-    return (jsonify({'username': user.username}), 201,
-            {'Location': url_for('get_user', id=user.id, _external=True)})
+    return jsonify({'status': 'OK'})
 
 
 @app.route('/api/users/<int:id>')

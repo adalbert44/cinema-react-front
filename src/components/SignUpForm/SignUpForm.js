@@ -30,27 +30,30 @@ class SignUpForm extends PureComponent {
         } else if (this.state.password !== this.state.repeatPassword) {
             this.setState({warning: 'passwords are different'});
         } else {
-            /*
-            fetch("http://127.0.0.1:5000/getToken",
+
+            fetch("http://127.0.0.1:5000/sign_up",
                 {  method: "POST",
                     headers: new Headers({
                         'content-type': 'application/json'
                     }),
                     body: JSON.stringify({
                         'username': this.state.login,
-                        'password': this.state.password
+                        'password': this.state.password,
+                        'email': this.state.email
                     })
                 })
                 .then(response => response.json())
                 .then(data => {
-
                     if (data.token !== '') {
                         console.log('---', data.token);
-                        this.props.logIn(data.token);
-                        this.props.endLogIn();
+                        if (data.status !== 'OK') {
+                            this.setState({warning: data.error})
+                        } else {
+                            this.setState({warning: 'registration is successful, verify your e-mail'});
+                        }
                     }
                 });
-            */
+
         }
 
         event.preventDefault();
