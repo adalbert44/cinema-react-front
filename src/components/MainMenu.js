@@ -27,18 +27,16 @@ class MainMenu extends Component {
                 <li style={{float: 'left', width: "100px"}}><img className="main" alt="tutu" src={logo}/></li>
                 {this.props.isAuthorized ? (
                     <span>
-                            <li onClick={this.props.logOut}> <img alt="tutu" src={log_out}/></li>
-                            <li> <img alt="tutu" src={profile}/></li>
-                        </span>
+                        <li onClick={this.props.logOut}> <img alt="tutu" src={log_out}/></li>
+                        <li> <img alt="tutu" src={profile}/></li>
+                    </span>
                 ) : (
                     <span>
-                            <li onClick={this.props.startLogIn}> <img alt="tutu" src={log_in}/></li>
-                            <li> <img alt="tutu" onClick={this.props.startSignUp} src={sign_up}/></li>
-                        </span>
+                        <li onClick={this.props.startLogIn}> <img alt="tutu" src={log_in}/></li>
+                        <li> <img alt="tutu" onClick={this.props.startSignUp} src={sign_up}/></li>
+                    </span>
                 )
                 }
-                <li><img alt="tutu" src={basket}/></li>
-
             </ul>
 
         )

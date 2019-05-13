@@ -78,12 +78,12 @@ export default class FilmSlider extends Component {
         const curSlide = <div key = {this.state.numberSlide} style = {{position: "absolute", left: parseInt((this.state.width - postPerPage*400) / 2)}}>{this.state.slides[this.state.numberSlide]}</div>
         return(
             <div className="slider">
-                <button className="left_arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>left</button>
+                <button className="left_arrow" onClick={this.prevSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}/>
                 <ReactCSSTransitionGroup transitionName={(this.state.last ? 'example-right' : 'example-left') + postPerPage}>
                     {curSlide}
                 </ReactCSSTransitionGroup>
 
-                <button className="right_arrow" onClick={this.nextSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}>right</button>
+                <button className="right_arrow" onClick={this.nextSlide} style={{width: parseInt((this.state.width - postPerPage*400) / 2)}}/>
             </div>
         )
     }

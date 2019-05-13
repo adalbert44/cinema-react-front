@@ -27,6 +27,7 @@
 }
 
 .left_arrow{
+    border: none;
     position: absolute;
     left: 0;
     margin:0;
@@ -35,9 +36,15 @@
     height: 450px;
     z-index: 1;
     background-color: #000515;
+    background-image: url(textures/left_arow.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+
 }
 
 .right_arrow{
+    border: none;
     position: absolute;
     right: 0;
     margin:0;
@@ -46,6 +53,9 @@
     height: 450px;
     z-index: 1;
     background-color: #000515;
+    background-image: url(textures/right_arow.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .carousel-inner{
