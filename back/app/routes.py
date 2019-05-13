@@ -406,9 +406,9 @@ def get_films():
             'title': film.get_title(),
             'id': film.get_id(),
             'url_picture': film.get_url_picture(),
-            'url_trailer': film.get_url_trailer(),
-            'description': film.get_description(),
-            'sessions': get_sessions_by_title(film.get_title())
+            #'url_trailer': film.get_url_trailer(),
+            'description': film.get_description()
+            #'sessions': get_sessions_by_title(film.get_title())
         })
 
     return json.dumps(ans_list)
