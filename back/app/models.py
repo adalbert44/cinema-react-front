@@ -10,7 +10,7 @@ from flask import g
 
 
 class Session(db.Model):
-    __tablename__ = 'sessions'
+
     id = db.Column(db.Integer, primary_key=True)
     title_film = db.Column(db.String(32), index=True)
     title_cinema = db.Column(db.String(50), index=True)
@@ -39,12 +39,12 @@ class Session(db.Model):
 
 
 class Film(db.Model):
-    __tablename__ = 'films'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(32), index=True)
     url_picture = db.Column(db.String(100), index=True)
     url_trailer = db.Column(db.String(100), index=True)
     description = db.Column(db.String(1000), index=True)
+    #comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
     def get_id(self):
         return self.id
@@ -59,10 +59,13 @@ class Film(db.Model):
 
 
 class User(db.Model):
-    __tablename__ = 'users'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index=True)
     password_hash = db.Column(db.String(64))
+    email = db.Column(db.String(64), index=True)
+    photo = db.Column(db.String(100), index=True)
+    personal_info = db.relationship('Post', backref='author', lazy='dynamic')
 
     def hash_password(self, password):
         self.password_hash = pwd_context.encrypt(password)
@@ -102,3 +105,17 @@ def verify_password(username_or_token, password):
     return True
 
 
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    header = db.Column(db.String(100), index=True)
+    body = db.Column(db.String(500), index=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    header = db.Column(db.String(100), index=True)
+    body = db.Column(db.String(500), index=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
