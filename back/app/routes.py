@@ -388,10 +388,39 @@ def add_films(lst_films):
 
         update_sessions(item)
         print('@@@')
-        print('@@@')
-        print('@@@')
-        print('@@@')
-        print('@@@')
+
+
+
+@app.route("/get_film", methods=["GET","POST"])
+@cross_origin()
+def get_film():
+
+    id = request.json.get('id')
+
+    film = Film.query.get(id)
+
+    '''
+    ans = []
+    ans.append({
+        'title': film.get_title(),
+        'id': film.get_id(),
+        'url_picture': film.get_url_picture(),
+        'url_trailer': film.get_url_trailer(),
+        'description': film.get_description(),
+        'sessions': get_sessions_by_title(film.get_title())
+    })
+    '''
+    info = {
+        'title': film.get_title(),
+        'id': film.get_id(),
+        'url_picture': film.get_url_picture(),
+        'url_trailer': film.get_url_trailer(),
+        'description': film.get_description(),
+        'sessions': get_sessions_by_title(film.get_title())
+    }
+    return json.dumps(info)
+
+
 
 
 @app.route("/get_films", methods=["GET","POST"])
