@@ -9,7 +9,8 @@ class LoginForm extends PureComponent {
 
             this.state = {
                 login: '',
-                password: ''
+                password: '',
+                warning: ''
             };
 
             this.handleLoginChange = this.handleLoginChange.bind(this);
@@ -33,9 +34,10 @@ class LoginForm extends PureComponent {
             .then(data => {
 
                 if (data.token !== '') {
-                    console.log('---', data.token);
                     this.props.logIn(data.token);
                     this.props.endLogIn();
+                } else {
+                    this.setState({warning: 'Login or password is not correct'});
                 }
             });
 
@@ -55,13 +57,17 @@ class LoginForm extends PureComponent {
             <div className="modal-window">
                 <div className="dark-background" onClick={this.props.endLogIn}/>
 
-                <form onSubmit={this.handleSubmit}>
+                <form className="login-form" onSubmit={this.handleSubmit}>
+                    Login:
+                    <br/>
                     <input
                         type="text"
                         placeholder="login"
                         value={this.state.login}
                         onChange={this.handleLoginChange}
                     />
+                    Password:
+                    <br/>
                     <input
                         type="password"
                         placeholder="password"
@@ -69,6 +75,7 @@ class LoginForm extends PureComponent {
                         onChange={this.handlePasswordChange}
                     />
                     <button onClick={this.handleSubmit} className="submit-button">LOG IN</button>
+                    {this.state.warning !== '' ? (<div className="error-message">{this.state.warning}</div>) : null}
                 </form>
             </div>
         );

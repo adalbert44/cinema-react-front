@@ -20,7 +20,12 @@
 
 }
 
-form {
+.sign-up-form {
+    padding-top: 40px;
+    padding-right: 80px;
+    padding-left: 80px;
+    border-radius: 10px;
+
     position: absolute;
     top: 0;
     bottom: 0;
@@ -31,7 +36,7 @@ form {
     margin: auto;
     /* центрирование */
 
-    height: 300px;
+    height: 500px;
     width: 500px;
 
     background: white no-repeat;
@@ -46,4 +51,27 @@ form {
 
     border-radius: 8px;
     z-index: 2;
+}
+
+.ok-message {
+
+    padding-top: 40px;
+    padding-right: 80px;
+    padding-left: 80px;
+    border-radius: 10px;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    /* центрирование */
+
+    margin: auto;
+    /* центрирование */
+
+    height: 100px;
+    width: 500px;
+
+    background: white no-repeat;
 }

@@ -12,7 +12,8 @@ class SignUpForm extends PureComponent {
             password: '',
             repeatPassword: '',
             email: '',
-            warning: ''
+            warning: '',
+            registered: false
         };
 
         this.handleLoginChange = this.handleLoginChange.bind(this);
@@ -49,11 +50,10 @@ class SignUpForm extends PureComponent {
                         if (data.status !== 'OK') {
                             this.setState({warning: data.error})
                         } else {
-                            this.setState({warning: 'registration is successful, verify your e-mail'});
+                            this.setState({registered: true});
                         }
                     }
                 });
-
         }
 
         event.preventDefault();
@@ -78,35 +78,46 @@ class SignUpForm extends PureComponent {
         return(
             <div className="modal-window">
                 <div className="dark-background" onClick={this.props.endSignUp}/>
+                {this.state.registered ? (
+                    <div className="ok-message">
+                        registration is successful, verify your e-mail
+                    </div>
+                ) : (
+                    <form className="sign-up-form" onSubmit={this.handleSubmit}>
+                        E-mail:
 
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        type="email"
-                        placeholder="e-mail"
-                        value={this.state.email}
-                        onChange={this.handleEmailChange}
-                    />
-                    <input
-                        type="text"
-                        placeholder="login"
-                        value={this.state.login}
-                        onChange={this.handleLoginChange}
-                    />
-                    <input
-                        type="password"
-                        placeholder="password"
-                        value={this.state.password}
-                        onChange={this.handlePasswordChange}
-                    />
-                    <input
-                        type="password"
-                        placeholder="repeat the password"
-                        value={this.state.repeatPassword}
-                        onChange={this.handleRepeatPasswordChange}
-                    />
-                    <button onClick={this.handleSubmit} className="submit-button">SIGN UP</button>
-                    {this.state.warning}
-                </form>
+                        <input
+                            type="email"
+                            placeholder="e-mail"
+                            value={this.state.email}
+                            onChange={this.handleEmailChange}
+                        />
+                        Login:
+                        <input
+                            type="text"
+                            placeholder="login"
+                            value={this.state.login}
+                            onChange={this.handleLoginChange}
+                        />
+                        Password:
+                        <input
+                            type="password"
+                            placeholder="password"
+                            value={this.state.password}
+                            onChange={this.handlePasswordChange}
+                        />
+                        Repeat the password:
+                        <input
+                            type="password"
+                            placeholder="repeat the password"
+                            value={this.state.repeatPassword}
+                            onChange={this.handleRepeatPasswordChange}
+                        />
+                        <button onClick={this.handleSubmit} className="submit-button">SIGN UP</button>
+                        {this.state.warning !== '' ? (<div className="error-message">{this.state.warning}</div>) : null}
+                    </form>
+                )}
+
             </div>
         );
     }
