@@ -26,13 +26,14 @@ class MainMenu extends Component {
         return (
             <ul>
                 <Link to={`/cinema`}>
-
-                <li style={{float: 'left', width: "100px"}}><img className="main" alt="tutu" src={logo}/></li>
+                    <li style={{float: 'left', width: "100px"}}><img className="main" alt="tutu" src={logo}/></li>
                 </Link>
                 {this.props.isAuthorized ? (
                     <span>
                         <li onClick={this.props.logOut}> <img alt="tutu" src={log_out}/></li>
-                        <li> <img alt="tutu" src={profile}/></li>
+                        <Link to={`/cinema/user`}>
+                            <li> <img alt="tutu" src={profile}/></li>
+                        </Link>
                     </span>
                 ) : (
                     <span>

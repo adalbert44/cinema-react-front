@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import MainMenu from './MainMenu'
 import FilmSlider from "./FilmSlider/FilmSlider";
 import LoginForm from "./LoginForm/LoginForm";
+import UserPage from "./UserPage/UserPage";
 import SignUpForm from "./SignUpForm/SignUpForm"
 import "./StyleApp.css"
 import {connect, Provider} from "react-redux";
@@ -31,6 +32,7 @@ class App extends Component {
                     <Route exact path='/' component={FilmSlider}/>
                     <Route exact path='/cinema' component={FilmSlider}/>
                     <Route path='/cinema/film/:id' component={InfoFilm}/>
+                    <Route path='/cinema/user' component={UserPage}/>
                 </div>
                 {this.props.logInStarted && <LoginForm/>}
                 {this.props.signUpStarted && <SignUpForm/>}
