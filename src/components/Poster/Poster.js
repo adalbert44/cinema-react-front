@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react'
 import {Carousel, Container, Col, Row, Media, Image} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import './StylePost.css'
+import {Link} from 'react-router-dom'
 
 export default class Poster extends PureComponent {
 
@@ -19,7 +20,11 @@ export default class Poster extends PureComponent {
             <div className="ContentOnImg">
                 <span className="NameOfFilm fadeInUp"><div className="textBox"> {filmInfo.title} </div></span>
                 <span className="DescribingText fadeInUp"><div className="textBox">{filmInfo.description}</div></span>
-                <button className="DescribingBtn fadeInUp">Подробнее о фильме</button>
+                <Link to={`/${filmInfo.id}`}>
+                    <button className="DescribingBtn fadeInUp">
+                        Подробнее о фильме
+                    </button>
+                </Link>
             </div> : <span/>;
 
 
@@ -29,7 +34,6 @@ export default class Poster extends PureComponent {
                 onMouseLeave={this.mouseLeave}
                 id="Poster"
             >
-
                 {describingBody}
                 <img
                     src={filmInfo.url_picture}
@@ -50,7 +54,5 @@ export default class Poster extends PureComponent {
             isMouseOnImg: true
         })
     }
-
-
 
 }

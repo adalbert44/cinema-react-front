@@ -6,6 +6,7 @@ import './AnimationStyleFilmSlider.css'
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 
+
 export default class FilmSlider extends Component {
     constructor(props) {
         super(props);

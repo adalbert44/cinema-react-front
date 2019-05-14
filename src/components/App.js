@@ -8,6 +8,8 @@ import "./StyleApp.css"
 import {connect, Provider} from "react-redux";
 import store from '../store'
 import {checkLogin} from "../actions/todoActions";
+import { BrowserRouter, Route } from 'react-router-dom';
+import InfoFilm from "./InfoFilm/InfoFilm";
 
 class App extends Component {
     constructor(props) {
@@ -18,7 +20,7 @@ class App extends Component {
 
     render() {
         return (
-
+            <BrowserRouter>
             <div className="merger">
                 <div id = "menuField">
                     <Provider store={store}>
@@ -26,11 +28,13 @@ class App extends Component {
                     </Provider>
                 </div>
                 <div id = "sliderField">
-                    <FilmSlider/>
+                    <Route exact path='/' component={FilmSlider}/>
+                    <Route path='/:id' component={InfoFilm}/>
                 </div>
                 {this.props.logInStarted && <LoginForm/>}
                 {this.props.signUpStarted && <SignUpForm/>}
             </div>
+            </BrowserRouter>
         )
     }
 }

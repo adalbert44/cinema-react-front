@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 
-
 export default class InfoFilm extends Component {
     constructor(props) {
         super(props)
@@ -12,16 +11,11 @@ export default class InfoFilm extends Component {
     }
 
     render() {
-        const {filmInfo} = this.props;
+        const filmInfo = parseInt(this.props.match.params.id, 10);
 
         return (
-            <div id = "modalWindow">
-                <div id = "background"/>
-                <div id = "info">
-                    <h3> {filmInfo.name} </h3>
-                    <img src={filmInfo.img}/>
-                    <article> {filmInfo.description} </article>
-                </div>
+            <div>
+                <span>Here film with id: {filmInfo}</span>
             </div>
         )
 
