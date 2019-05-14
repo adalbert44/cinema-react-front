@@ -29,7 +29,8 @@ class App extends Component {
                 </div>
                 <div id = "sliderField">
                     <Route exact path='/' component={FilmSlider}/>
-                    <Route path='/:id' component={InfoFilm}/>
+                    <Route exact path='/cinema' component={FilmSlider}/>
+                    <Route path='/cinema/film/:id' component={InfoFilm}/>
                 </div>
                 {this.props.logInStarted && <LoginForm/>}
                 {this.props.signUpStarted && <SignUpForm/>}

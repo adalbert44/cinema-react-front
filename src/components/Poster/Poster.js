@@ -20,7 +20,7 @@ export default class Poster extends PureComponent {
             <div className="ContentOnImg">
                 <span className="NameOfFilm fadeInUp"><div className="textBox"> {filmInfo.title} </div></span>
                 <span className="DescribingText fadeInUp"><div className="textBox">{filmInfo.description}</div></span>
-                <Link to={`/${filmInfo.id}`}>
+                <Link to={`/cinema/film/${filmInfo.id}`}>
                     <button className="DescribingBtn fadeInUp">
                         Подробнее о фильме
                     </button>
