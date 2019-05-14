@@ -102,13 +102,21 @@ def sign_up():
     return jsonify({'status': 'OK'})
 
 
-@app.route('/api/users/<int:id>')
+@app.route('/get_user/<int:id>')
 @cross_origin()
 def get_user(id):
     user = User.query.get(id)
     if not user:
-        abort(400)
-    return jsonify({'username': user.username})
+        return jsonify({'status': 'ERROR', 'error': 'User was not found'})
+
+    info = {
+        'id': id,
+        'username': user.username,
+        'email': user.email,
+        'photo': user.photo,
+    }
+
+    return json.dumps(info)
 
 
 @app.route('/api/token')
@@ -394,25 +402,16 @@ def add_films(lst_films):
 
 
 
-@app.route("/get_film", methods=["GET","POST"])
-@cross_origin()
-def get_film():
 
-    id = request.json.get('id')
+@app.route('/get_film/<int:id>', methods=["GET","POST"])
+@cross_origin()
+def get_film(id):
+
 
     film = Film.query.get(id)
+    if not film:
+        return jsonify({'status': 'ERROR', 'error': 'Film was not found'})
 
-    '''
-    ans = []
-    ans.append({
-        'title': film.get_title(),
-        'id': film.get_id(),
-        'url_picture': film.get_url_picture(),
-        'url_trailer': film.get_url_trailer(),
-        'description': film.get_description(),
-        'sessions': get_sessions_by_title(film.get_title())
-    })
-    '''
     info = {
         'title': film.get_title(),
         'id': film.get_id(),
