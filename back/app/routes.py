@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect, url_for, jsonify, abort, g, request
 from app import app, db, auth, cors
-from app.models import User, Film, Session
+from app.models import User, Film, Session, Post, Comment
 from flask_cors import CORS, cross_origin
 import urllib.request
 from bs4 import BeautifulSoup
@@ -109,14 +109,28 @@ def get_user(id):
     if not user:
         return jsonify({'status': 'ERROR', 'error': 'User was not found'})
 
+    posts = user.personal_info.all()
+    user_posts = []
+    for post in posts:
+
+        user_posts.append({
+            'id': post.id,
+            'user_id': post.user_id,
+            'header': post.header,
+            'body': post.body,
+            'timestamp': (str)(post.timestamp)
+        })
+
+
     info = {
         'id': id,
         'username': user.username,
         'email': user.email,
         'photo': user.photo,
+        'posts': user_posts
     }
 
-    return json.dumps(info)
+    return jsonify({"status": "OK", "result": info})
 
 
 @app.route('/api/token')
@@ -244,7 +258,7 @@ def parse_kontra(html):
 
     for item in items:
         cur_id += 1
-        #if (cur_id > 1):
+        #if (cur_id > 4):
         #    break
         id = cur_id
 
@@ -365,7 +379,7 @@ def update_sessions(film):
                           tag = tag)
         db.session.add(session)
         db.session.commit()
-        print()
+
 
 @app.route("/add_films", methods=["GET","POST"])
 def add_films(lst_films):
@@ -412,15 +426,28 @@ def get_film(id):
     if not film:
         return jsonify({'status': 'ERROR', 'error': 'Film was not found'})
 
+    comments = film.comments.all()
+    film_comments = []
+    for comment in comments:
+        film_comments.append({
+            'id': comment.id,
+            'author_id': comment.author_id,
+            'film_id': comment.film_id,
+            'header': comment.header,
+            'body': comment.body,
+            'timestamp': (str)(comment.timestamp)
+        })
+
     info = {
         'title': film.get_title(),
         'id': film.get_id(),
         'url_picture': film.get_url_picture(),
         'url_trailer': film.get_url_trailer(),
         'description': film.get_description(),
-        'sessions': get_sessions_by_title(film.get_title())
+        'sessions': get_sessions_by_title(film.get_title()),
+        'comments': film_comments
     }
-    return json.dumps(info)
+    return jsonify({"status": "OK", "result": info})
 
 
 
@@ -471,3 +498,38 @@ def parse_sites():
 
     print('end parse')
     return "ok_parse"
+
+@app.route("/add_post/<int:id>", methods=["GET","POST"])
+def add_post(id):
+    header_post = request.json.get('header')
+    body_post = request.json.get('body')
+    user = User.query.get(id)
+    if not user:
+        return jsonify({'status': 'ERROR', 'error': 'User was not found'})
+    post = Post(header=header_post, body=body_post, author=user)
+    db.session.add(post)
+    db.session.commit()
+    return jsonify({"status": "OK"})
+
+
+@app.route("/add_comment/<int:id>", methods=["GET","POST"])
+def add_comment(id):
+    header_comment = request.json.get('header')
+    body_comment = request.json.get('body')
+    author_id_comment = request.json.get('author_id')
+
+    film = Film.query.get(id)
+    user = User.query.get(author_id_comment)
+    if not film or not user:
+        return jsonify({'status': 'ERROR', 'error': 'Film or User were not found'})
+
+    comment = Comment(header=header_comment, body=body_comment, film_parrent=film, author_id=author_id_comment)
+    db.session.add(comment)
+    db.session.commit()
+    return jsonify({"status": "OK"})
+
+@app.route("/clear_comments", methods=["GET","POST"])
+def clear_comments():
+    db.session.query(Comment).delete()
+    db.session.commit()
+    return 'ok_clear_comments'

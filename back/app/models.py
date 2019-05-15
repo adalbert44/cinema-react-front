@@ -44,7 +44,7 @@ class Film(db.Model):
     url_picture = db.Column(db.String(100), index=True)
     url_trailer = db.Column(db.String(100), index=True)
     description = db.Column(db.String(1000), index=True)
-    #comments = db.relationship('Comment', backref='author', lazy='dynamic')
+    comments = db.relationship('Comment', backref='film_parrent', lazy='dynamic')
 
     def get_id(self):
         return self.id
@@ -59,7 +59,6 @@ class Film(db.Model):
 
 
 class User(db.Model):
-
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index=True)
     password_hash = db.Column(db.String(64))
@@ -115,7 +114,8 @@ class Post(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
+    author_id = db.Column(db.Integer, index=True)
     header = db.Column(db.String(100), index=True)
     body = db.Column(db.String(500), index=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
