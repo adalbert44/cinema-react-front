@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, flash, redirect, url_for, jsonify, abort, g, request
 from app import app, db, auth, cors
-from app.models import User, Film, Session, Post, Comment
+from app.models import User, Film, Session, Post, Comment, ReserveComment
 from flask_cors import CORS, cross_origin
 import urllib.request
 from bs4 import BeautifulSoup
@@ -142,7 +142,6 @@ def get_auth_token():
 
 
 
-
 @app.route("/ping")
 @cross_origin()
 def hello():
@@ -250,8 +249,10 @@ def parse_kontra(html):
 
     for item in items:
         cur_id += 1
-        #if (cur_id > 4):
-        #    break
+        #if (cur_id == 1):
+        #    continue
+        if (cur_id > 3):
+            break
         id = cur_id
 
         title = item.div.a.attrs["title"]
@@ -300,7 +301,7 @@ def get_sessions_by_title(title):
         score = fuzz.token_sort_ratio(tr_title, tr_session)
         if (score >= 75):
             sessions_list.append({
-                'id': session.get_id(),
+                'id': session.id,
                 'title_film': session.title_film,
                 'title_cinema': session.title_cinema,
                 'location': session.location,
@@ -464,11 +465,71 @@ def get_films():
     return json.dumps(ans_list)
 
 
+@app.route("/make_reserve_copy_comments", methods=["GET","POST"])
+def make_reserve_copy_comments():
+    comments = Comment.query.all()
+    for comment in comments:
+        film = Film.query.get(comment.film_id)
+        if not film:
+            continue
+        reserve_comment = ReserveComment(author_id=comment.author_id,
+                                         header=comment.header,
+                                         body=comment.body,
+                                         timestamp=comment.timestamp,
+                                         film_title=film.title)
+        db.session.add(reserve_comment)
+        db.session.commit()
+    clear_comments()
+    return "reserve copy of comments was made"
+
+
+@app.route("/get_film_id_by_title", methods=["GET","POST"])
+def get_film_id_by_title(title):
+    films = Film.query.all()
+    tr_item = translit(title, "ru")
+    ans_id = 0
+    for film in films:
+        tr_title = translit(film.title, "ru")
+        score = fuzz.token_sort_ratio(tr_item, tr_title)
+        if (score >= 75):
+            ans_id = film.id
+            break
+    return ans_id
+
+
+@app.route("/clear_reserve_copy", methods=["GET","POST"])
+def clear_reserve_copy():
+    db.session.query(ReserveComment).delete()
+    db.session.commit()
+    return 'ok_clear_reserve_comments'
+
+@app.route("/set_old_comments", methods=["GET","POST"])
+def set_old_comments():
+    old_comments = ReserveComment.query.all()
+    for old_comment in old_comments:
+        film_id = get_film_id_by_title(old_comment.film_title)
+        if film_id == 0:
+            continue
+        film = Film.query.get(film_id)
+        if not film:
+            continue
+        comment = Comment(header=old_comment.header,
+                          body=old_comment.body,
+                          film_parrent=film,
+                          author_id=old_comment.author_id,
+                          timestamp=old_comment.timestamp
+        )
+        db.session.add(comment)
+        db.session.commit()
+    clear_reserve_copy()
+
 @app.route("/parse_sites", methods=["GET","POST"])
 def parse_sites():
 
     print('start pars')
 
+    clear_reserve_copy()
+    make_reserve_copy_comments()
     clear_films()
     clear_sessions()
 
@@ -487,6 +548,8 @@ def parse_sites():
     ...
     ...
     '''
+
+    set_old_comments()
 
     print('end parse')
     return "ok_parse"

@@ -93,3 +93,11 @@ class Comment(db.Model):
     header = db.Column(db.String(100), index=True)
     body = db.Column(db.String(500), index=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+class ReserveComment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, index=True)
+    header = db.Column(db.String(100), index=True)
+    body = db.Column(db.String(500), index=True)
+    timestamp = db.Column(db.DateTime, index=True)
+    film_title = db.Column(db.String(32), index=True)
