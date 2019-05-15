@@ -141,14 +141,6 @@ def get_auth_token():
     return jsonify({'token': token.decode('ascii'), 'duration': 600})
 
 
-@app.route('/api/resource')
-@auth.login_required
-@cross_origin()
-def get_resource():
-    return jsonify({'data': 'Hello, %s!' % g.user.username})
-
-
-
 
 
 @app.route("/ping")
@@ -304,18 +296,18 @@ def get_sessions_by_title(title):
 
     for session in sessions:
 
-        tr_session = translit(session.get_title_film(), "ru")
+        tr_session = translit(session.title_film, "ru")
         score = fuzz.token_sort_ratio(tr_title, tr_session)
         if (score >= 75):
             sessions_list.append({
                 'id': session.get_id(),
-                'title_film': session.get_title_film(),
-                'title_cinema': session.get_title_cinema(),
-                'location': session.get_location(),
-                'date': session.get_date(),
-                'time': session.get_time(),
-                'price': session.get_price(),
-                'tag': session.get_tag()
+                'title_film': session.title_film,
+                'title_cinema': session.title_cinema,
+                'location': session.location,
+                'date': session.date,
+                'time': session.time,
+                'price': session.price,
+                'tag': session.tag
         })
 
     return sessions_list
@@ -392,10 +384,10 @@ def add_films(lst_films):
         id = 0
         new_film = True
         for film in films:
-            tr_film = translit(film.get_title(), "ru")
+            tr_film = translit(film.title, "ru")
             score = fuzz.token_sort_ratio(tr_item, tr_film)
             if score >= 75:
-                id = film.get_id()
+                id = film.id
                 new_film = False
                 break
 
@@ -406,7 +398,7 @@ def add_films(lst_films):
                      url_trailer = item['url_trailer'],
                      description = item['description']
                      )
-            id = f.get_id()
+            id = f.id
             db.session.add(f)
             db.session.commit()
 
@@ -439,12 +431,12 @@ def get_film(id):
         })
 
     info = {
-        'title': film.get_title(),
-        'id': film.get_id(),
-        'url_picture': film.get_url_picture(),
-        'url_trailer': film.get_url_trailer(),
-        'description': film.get_description(),
-        'sessions': get_sessions_by_title(film.get_title()),
+        'title': film.title,
+        'id': film.id,
+        'url_picture': film.url_picture,
+        'url_trailer': film.url_trailer,
+        'description': film.description,
+        'sessions': get_sessions_by_title(film.title),
         'comments': film_comments
     }
     return jsonify({"status": "OK", "result": info})
@@ -461,11 +453,11 @@ def get_films():
     for film in films:
 
         ans_list.append({
-            'title': film.get_title(),
-            'id': film.get_id(),
-            'url_picture': film.get_url_picture(),
+            'title': film.title,
+            'id': film.id,
+            'url_picture': film.url_picture,
             #'url_trailer': film.get_url_trailer(),
-            'description': film.get_description()
+            'description': film.description
             #'sessions': get_sessions_by_title(film.get_title())
         })
 

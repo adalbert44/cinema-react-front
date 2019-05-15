@@ -20,22 +20,6 @@ class Session(db.Model):
     price = db.Column(db.String(32), index=True)
     tag = db.Column(db.String(10), index=True)
 
-    def get_id(self):
-        return self.id
-    def get_title_film(self):
-        return self.title_film
-    def get_title_cinema(self):
-        return self.title_cinema
-    def get_location(self):
-        return self.location
-    def get_date(self):
-        return self.date
-    def get_time(self):
-        return self.time
-    def get_price(self):
-        return self.price
-    def get_tag(self):
-        return self.tag
 
 
 class Film(db.Model):
@@ -46,16 +30,6 @@ class Film(db.Model):
     description = db.Column(db.String(1000), index=True)
     comments = db.relationship('Comment', backref='film_parrent', lazy='dynamic')
 
-    def get_id(self):
-        return self.id
-    def get_title(self):
-        return self.title
-    def get_url_picture(self):
-        return self.url_picture
-    def get_url_trailer(self):
-        return self.url_trailer
-    def get_description(self):
-        return self.description
 
 
 class User(db.Model):
