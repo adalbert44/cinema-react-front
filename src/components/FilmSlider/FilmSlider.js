@@ -52,7 +52,6 @@ export default class FilmSlider extends Component {
             .then(response => response.json())
             .then(data => {
                 const films = data;
-
                 let posters = [];
                 if (films !== undefined) {
                     for (let i = 0; i < films.length; i++) {

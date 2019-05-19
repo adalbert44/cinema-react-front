@@ -9,7 +9,7 @@ import "./StyleApp.css"
 import {connect, Provider} from "react-redux";
 import store from '../store'
 import {checkLogin} from "../actions/todoActions";
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import InfoFilm from "./InfoFilm/InfoFilm";
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <HashRouter>
             <div className="merger">
                 <div id = "menuField">
                     <Provider store={store}>
@@ -37,7 +37,7 @@ class App extends Component {
                 {this.props.logInStarted && <LoginForm/>}
                 {this.props.signUpStarted && <SignUpForm/>}
             </div>
-            </BrowserRouter>
+            </HashRouter>
         )
     }
 }

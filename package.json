@@ -13,8 +13,10 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
     "react-transition-group": "^1.2.1",
+    "react-youtube": "^7.9.0",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "video-react": "^0.13.7"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +32,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {}
 }
