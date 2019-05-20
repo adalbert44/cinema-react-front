@@ -251,8 +251,7 @@ def parse_kontra(html):
         cur_id += 1
         #if (cur_id == 1):
         #    continue
-        if (cur_id > 3):
-            break
+
         id = cur_id
 
         title = item.div.a.attrs["title"]

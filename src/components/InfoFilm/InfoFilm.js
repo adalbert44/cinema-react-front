@@ -13,7 +13,8 @@ export default class InfoFilm extends Component {
             sessions: [{}],
             title: '',
             url_picture: '',
-            url_trailer: ''
+            url_trailer: '',
+            istrailer: false
         }
     }
 
@@ -41,7 +42,7 @@ export default class InfoFilm extends Component {
     }
 
     render() {
-        console.log(this.state.url_trailer)
+        console.log(this.state.sessions)
         return (
             <div>
                 <h2>{this.state.title}</h2>
