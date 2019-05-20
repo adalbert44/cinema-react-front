@@ -52,6 +52,9 @@ export default class InfoFilm extends Component {
                     alt="img">
                 </img>
                 <p>Description:{this.state.description}</p>
+                <YouTube
+                videoId={this.state.url_trailer}
+                />
 
             </div>
         )

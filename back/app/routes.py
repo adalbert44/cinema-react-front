@@ -435,7 +435,7 @@ def get_film(id):
         'title': film.title,
         'id': film.id,
         'url_picture': film.url_picture,
-        'url_trailer': film.url_trailer,
+        'url_trailer': film.url_trailer[film.url_trailer.find('=') + 1:],
         'description': film.description,
         'sessions': get_sessions_by_title(film.title),
         'comments': film_comments
