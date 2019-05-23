@@ -21,3 +21,8 @@
     z-index:3;
     background: #000515;
 }
+
+.full-screen {
+    height: 100%;
+    width: 100%;
+}

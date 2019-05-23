@@ -1,0 +1,25 @@
+.info-fieldd{
+    background-color: #000007;
+    height: 100%;
+    width: 100%;
+}
+/*
+img:before {
+    border-radius: 100%;
+    content: ' ';
+    display: block;
+    position: absolute;
+    height: 500px;
+    background-image: url("http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg");
+}
+*/
+.info-fieldd img {
+    margin-top: 100px;
+    width: 21vw;
+    height: 21vw;
+    margin-left: 15%;
+    margin-right: 15%;
+    border-radius: 100%;
+    background-image: url("http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg");
+    background-size: 100% 100%;
+}

@@ -32,7 +32,7 @@ class App extends Component {
                     <Route exact path='/' component={FilmSlider}/>
                     <Route exact path='/cinema' component={FilmSlider}/>
                     <Route path='/cinema/film/:id' component={InfoFilm}/>
-                    <Route path='/cinema/user' component={UserPage}/>
+                    <Route path='/cinema/user/:id' component={UserPage}/>
                 </div>
                 {this.props.logInStarted && <LoginForm/>}
                 {this.props.signUpStarted && <SignUpForm/>}

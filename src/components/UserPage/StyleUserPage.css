@@ -1,0 +1,13 @@
+.info-field {
+    position: absolute;
+    height: 100%;
+    width: 30%;
+    margin: 0 0 0 0;
+}
+
+.posts {
+    margin-left: 30%;
+    float: left;
+    height: 100%;
+    width: 70%;
+}

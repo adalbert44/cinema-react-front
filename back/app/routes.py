@@ -102,7 +102,7 @@ def sign_up():
     return jsonify({'status': 'OK'})
 
 
-@app.route('/get_user/<int:id>')
+@app.route('/get_user/<int:id>', methods=["POST", "GET"])
 @cross_origin()
 def get_user(id):
     user = User.query.get(id)

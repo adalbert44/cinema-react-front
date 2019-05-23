@@ -10,6 +10,7 @@ import sign_up from "./textures/noun_Sign Up_736746.png"
 import {connect} from "react-redux"
 import {checkLogin, startLogIn, logOut, startSignUp} from '../actions/todoActions'
 import {Link} from "react-router-dom";
+import {LOG_IN, LOG_OUT} from "../constans";
 
 class MainMenu extends Component {
 
@@ -20,9 +21,29 @@ class MainMenu extends Component {
         this.state = {
             isMouseOnImg: false
         }
+
     }
 
-    render() {
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.isAuthorized) {
+            fetch("http://127.0.0.1:5000/getCurUserID",
+                {
+                    method: "POST",
+                    headers: new Headers({
+                        'content-type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        'token': localStorage.getItem("userToken")
+                    })
+                })
+                .then(response => response.json())
+                .then(curUserID => {
+                    this.setState({curUserID:curUserID.ID});
+                })
+        }
+    }
+
+        render() {
         return (
             <ul>
                 <Link to={`/cinema`}>
@@ -31,7 +52,7 @@ class MainMenu extends Component {
                 {this.props.isAuthorized ? (
                     <span>
                         <li onClick={this.props.logOut}> <img alt="tutu" src={log_out}/></li>
-                        <Link to={`/cinema/user`}>
+                        <Link to={`/cinema/user/${this.state.curUserID}`}>
                             <li> <img alt="tutu" src={profile}/></li>
                         </Link>
                     </span>
