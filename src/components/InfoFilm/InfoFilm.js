@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import YouTube from "react-youtube";
 import './StyleInfoFilm.css'
+import '../SessionsTable/SessionTable'
+import SessionTable from "../SessionsTable/SessionTable";
 
 export default class InfoFilm extends Component {
     constructor(props) {
@@ -14,7 +16,7 @@ export default class InfoFilm extends Component {
             title: '',
             url_picture: '',
             url_trailer: '',
-            istrailer: false
+            openedSession: [{}]
         }
     }
 
@@ -25,14 +27,15 @@ export default class InfoFilm extends Component {
                 const filmInfo = data;
                 const comments = Object.assign({}, data.result.comments);
                 const sessions = Object.assign({}, data.result.sessions);
-                if (filmInfo !== undefined && filmInfo.status!='ERROR'){
+                if (filmInfo !== undefined){
                     this.setState({
                         comments: comments,
                         description: filmInfo.result.description,
                         sessions: sessions,
                         title: filmInfo.result.title,
                         url_picture: filmInfo.result.url_picture,
-                        url_trailer: filmInfo.result.url_trailer
+                        url_trailer: filmInfo.result.url_trailer,
+
                     })
 
                 }
@@ -41,8 +44,39 @@ export default class InfoFilm extends Component {
 
     }
 
+    unique = (arr) => {
+        let obj = {};
+
+        for (let i = 0; i < arr.length; i++) {
+            let str = arr[i];
+            obj[str] = true;
+        }
+
+        return Object.keys(obj);
+    }
+
+    setInfoInTable = (day, sessions) => {
+        this.setState({openedSession: Object.values(sessions).map((session) => {
+            if (day == session.date)
+                return session;
+        })
+    })
+    }
+
     render() {
-        console.log(this.state.sessions)
+        const sessions = this.state.sessions;
+        let days = Object.values(sessions).map(session => {
+            if (session.date != undefined)
+                return {'num': +(session.date.substr(0,2)),
+                        'str': session.date};
+            else
+                return '';
+        });
+        days = days.sort((a,b) => ((+a.num)-(+b.num)));
+        days = this.unique(days.map((i) => i.str));
+        let buttonsDay = days.map(day => {
+            return <button onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
+        })
         return (
             <div>
                 <h2>{this.state.title}</h2>
@@ -56,7 +90,9 @@ export default class InfoFilm extends Component {
                 <YouTube
                 videoId={this.state.url_trailer}
                 />
-
+                <p>{this.state.sessions.date}</p>
+                {buttonsDay}
+                <SessionTable sessions = {this.state.openedSession}/>
             </div>
         )
 
