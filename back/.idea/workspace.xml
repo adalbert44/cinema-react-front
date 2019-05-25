@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48cf35ff-4672-4b78-ba4f-2d455eaedf3c" name="Default Changelist" comment="test function">
-      <change afterPath="$PROJECT_DIR$/../src/components/InfoField/InfoField.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/components/InfoField/StyleInfoField.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/components/Posts/Posts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/components/Posts/StylePosts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/back.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/back.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/MainMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/MainMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/StyleApp.css" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/StyleApp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/UserPage/StyleUserPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/UserPage/StyleUserPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/UserPage/UserPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/UserPage/UserPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/InfoField/InfoField.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/InfoField/InfoField.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/InfoField/StyleInfoField.css" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/InfoField/StyleInfoField.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,8 +62,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="129" column="27" lean-forward="true" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="27" />
+            <state relative-caret-position="661">
+              <caret line="397" column="55" lean-forward="true" selection-start-line="397" selection-start-column="55" selection-end-line="397" selection-end-column="55" />
               <folding>
                 <element signature="e#24#111#0" expanded="true" />
               </folding>
@@ -309,8 +299,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="129" column="27" lean-forward="true" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="27" />
+        <state relative-caret-position="661">
+          <caret line="397" column="55" lean-forward="true" selection-start-line="397" selection-start-column="55" selection-end-line="397" selection-end-column="55" />
           <folding>
             <element signature="e#24#111#0" expanded="true" />
           </folding>

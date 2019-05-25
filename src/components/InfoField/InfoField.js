@@ -21,18 +21,36 @@ export default class InfoField extends Component {
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 this.setState({
-                    name: data.username,
-                    photoURL: data.photo
+                    name: data.result.username,
+                    photoURL: data.result.photo
+                });
+            })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        fetch("http://127.0.0.1:5000/get_user/" + nextProps.ID,
+            {
+                method: "POST",
+                headers: new Headers({
+                    'content-type': 'application/json'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    name: data.result.username,
+                    photoURL: data.result.photo
                 });
             })
     }
 
     render() {
-
         return (
             <div className="info-fieldd">
                 <img src={this.state.photoURL} alt=""/>
+                <div className="name">{this.state.name}</div>
             </div>
         )
     }
