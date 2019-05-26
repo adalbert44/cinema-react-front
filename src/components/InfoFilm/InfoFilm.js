@@ -75,24 +75,26 @@ export default class InfoFilm extends Component {
         days = days.sort((a,b) => ((+a.num)-(+b.num)));
         days = this.unique(days.map((i) => i.str));
         let buttonsDay = days.map(day => {
-            return <button className="btn btn-warning" onMouseEnter={() => this.setInfoInTable(day,sessions)}>{day}</button>
+            return <button className="btn btn-warning" onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
         })
         return (
-            <div>
-                <h2>{this.state.title}</h2>
-
-                <img
-                    className='Poster'
-                    src={this.state.url_picture}
-                    alt="img">
-                </img>
-                <p>Description:{this.state.description}</p>
-                <YouTube
-                videoId={this.state.url_trailer}
-                />
-                <p>{this.state.sessions.date}</p>
-                {buttonsDay}
-                <SessionTable sessions = {this.state.openedSession}/>
+            <div className="InfoFilm">
+                <div className="block-left">
+                    <h2>{this.state.title}</h2>
+                    <img
+                        className='Poster'
+                        src={this.state.url_picture}
+                        alt="img">
+                    </img>
+                    <p>Description:{this.state.description}</p>
+                </div>
+                <div className="block-right">
+                    <YouTube
+                    videoId={this.state.url_trailer}
+                    />
+                    {buttonsDay}
+                    <SessionTable sessions = {this.state.openedSession}/>
+                </div>
             </div>
         )
 
