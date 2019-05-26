@@ -23,9 +23,9 @@ export default class SessionTable extends Component {
                 </tr>
             )
         });
-        return (
+        let Table = (
             <div>
-                <table>
+                <table className="table">
                     <tr>
                         <td>Time</td>
                         <td>Cinema</td>
@@ -33,6 +33,12 @@ export default class SessionTable extends Component {
                     </tr>
                     {rows}
                 </table>
+            </div>
+        )
+        if (rows.length == 1) Table ='';
+        return (
+            <div>
+                {Table}
             </div>
         )
 

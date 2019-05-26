@@ -75,7 +75,7 @@ export default class InfoFilm extends Component {
         days = days.sort((a,b) => ((+a.num)-(+b.num)));
         days = this.unique(days.map((i) => i.str));
         let buttonsDay = days.map(day => {
-            return <button onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
+            return <button className="btn btn-warning" onMouseEnter={() => this.setInfoInTable(day,sessions)}>{day}</button>
         })
         return (
             <div>
