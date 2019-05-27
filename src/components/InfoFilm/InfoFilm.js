@@ -25,6 +25,7 @@ export default class InfoFilm extends Component {
             .then(response => response.json())
             .then(data => {
                 const filmInfo = data;
+                console.log(data);
                 const comments = Object.assign({}, data.result.comments);
                 const sessions = Object.assign({}, data.result.sessions);
                 if (filmInfo !== undefined){
@@ -56,37 +57,38 @@ export default class InfoFilm extends Component {
     }
 
     setInfoInTable = (day, sessions) => {
-        this.setState({openedSession: Object.values(sessions).map((session) => {
+        const openSession = Object.values(sessions).map((session) => {
             if (day == session.date)
                 return session;
-        })
-    })
+        }).sort((a,b) => {
+            if (a.time.substr(0,2) == b.time.substr(0,2)){
+                return a.time.substr(3,2) - b.time.substr(3,2);
+            } else {
+                return a.time.substr(0,2) - b.time.substr(0,2);
+            }
+        });
+        this.setState({openedSession: openSession})
     }
 
     render() {
         const sessions = this.state.sessions;
-        let days = Object.values(sessions).map(session => {
-            if (session.date != undefined)
-                return {'num': +(session.date.substr(0,2)),
-                        'str': session.date};
-            else
-                return '';
-        });
-        days = days.sort((a,b) => ((+a.num)-(+b.num)));
-        days = this.unique(days.map((i) => i.str));
+        let days = Object.values(sessions);
+        days = days.sort((a,b) => ((+a.date.substr(0,2))-(+b.date.substr(0,2))));
+        days = this.unique(days.map((i) => i.date));
         let buttonsDay = days.map(day => {
             return <button className="btn btn-warning" onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
         })
         return (
             <div className="InfoFilm">
                 <div className="block-left">
-                    <h2>{this.state.title}</h2>
                     <img
                         className='Poster'
+                        id = 'img'
                         src={this.state.url_picture}
                         alt="img">
                     </img>
-                    <p>Description:{this.state.description}</p>
+                    <h2>{this.state.title}</h2>
+                    <p id="Description">Description:{this.state.description}</p>
                 </div>
                 <div className="block-right">
                     <YouTube

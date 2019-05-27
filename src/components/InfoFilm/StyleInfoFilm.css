@@ -1,20 +1,28 @@
-img{
-    float:left;
+#img{
+    display:block; margin:5px auto;
+    text-align:center;
 }
 h2{
-    vertical-align: top;
+    text-align:center;
+    color: #ffc822;
 }
-p{
-    vertical-align: top;
+#Description{
+    padding: 5px;
+    color: #ffc822;
 }
 .block-left{
-    width:50%;
+    width:35%;
     height:800px;
     overflow:auto;
     float:left;
+    padding: 10px;
 }
 .block-right{
-    width:50%;
+    width:65%;
     height:800px;
     overflow:auto;
+    padding: 10px;
+}
+.InfoFilm{
+    background: url(../textures/FilmInfoPageBackground.png) no-repeat center center fixed;
 }
