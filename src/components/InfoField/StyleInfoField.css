@@ -2,24 +2,41 @@
     background-color: #000007;
     height: 100%;
     width: 100%;
+    margin-top: 65px;
 }
-/*
-img:before {
-    border-radius: 100%;
-    content: ' ';
-    display: block;
-    position: absolute;
-    height: 500px;
-    background-image: url("http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg");
-}
-*/
-.info-fieldd img {
-    margin-top: 100px;
+
+.info-fieldd .profile-photo {
     width: 21vw;
     height: 21vw;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin: 3vw 15% 15%  15%;
     border-radius: 100%;
-    background-image: url("http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg");
+    background-image: url("../textures/defaultAvatar.jpg");
     background-size: 100% 100%;
+}
+
+.name {
+    text-align: center;
+    color: #FF9E26;
+    font-size: 3vw;
+    font-weight: 700;
+}
+
+.edit-button {
+    height: 3vw;
+    width: 3vw;
+    position:absolute;
+    top: 27vw;
+    left: 23vw;
+}
+
+.edit-button img{
+    border-radius: 0;
+    height: 3vw;
+    width: 3vw;
+    margin: 0;
+}
+
+.edit-button:hover {
+    filter: brightness(150%);
+    cursor: pointer;
 }
