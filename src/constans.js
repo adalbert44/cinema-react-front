@@ -4,3 +4,5 @@ export const START_LOGIN = 'START_LOGIN';
 export const END_LOGIN = 'END_LOGIN';
 export const START_SIGN_UP = 'START_SIGN_UP';
 export const END_SIGN_UP = 'END_SIGN_UP';
+export const START_EDIT_PROFILE = 'START_EDIT_PROFILE';
+export const END_EDIT_PROFILE = 'END_EDIT_PROFILE';

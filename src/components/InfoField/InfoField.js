@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import "./StyleInfoField.css"
 import {connect} from "react-redux";
 import editTex from "./textures/edit_tex.png";
+import {startEditProfile} from '../../actions/todoActions'
 
 
 class InfoField extends Component {
@@ -29,9 +30,27 @@ class InfoField extends Component {
                     photoURL: data.result.photo
                 });
             })
+
+        if(this.props.isAuthorized) {
+            fetch("http://127.0.0.1:5000/getCurUserID",
+                {
+                    method: "POST",
+                    headers: new Headers({
+                        'content-type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        'token': localStorage.getItem("userToken")
+                    })
+                })
+                .then(response => response.json())
+                .then(curUserID => {
+                    this.setState({canBeEdited:curUserID.ID == this.props.ID});
+                })
+        }
     }
 
     componentWillReceiveProps(nextProps) {
+
         fetch("http://127.0.0.1:5000/get_user/" + nextProps.ID,
             {
                 method: "POST",
@@ -70,7 +89,7 @@ class InfoField extends Component {
             <div className="info-fieldd">
                 <img className="profile-photo" src={this.state.photoURL} alt=""/>
                 {this.state.canBeEdited ? (
-                    <div className="edit-button"/*onClick={this.props.startLogIn}*/> <img alt="tutu" src={editTex}/></div>
+                    <div className="edit-button" onClick={this.props.startEditProfile}> <img alt="tutu" src={editTex}/></div>
                 ) : (
                     <div/>
                 )
@@ -88,4 +107,12 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(InfoField)
+function mapDispatchProps(dispatch) {
+    return {
+        startEditProfile: () => {
+            dispatch(startEditProfile());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchProps)(InfoField)
