@@ -81,7 +81,8 @@ class InfoField extends Component {
                 .then(curUserID => {
                     this.setState({canBeEdited:curUserID.ID == this.props.ID});
                 })
-        }
+        } else
+            this.setState({canBeEdited: 0});
     }
 
     render() {

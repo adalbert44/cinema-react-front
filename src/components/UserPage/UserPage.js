@@ -15,7 +15,7 @@ class UserPage extends Component {
     }
 
     render() {
-
+        
         return (
             <div className="full-screen">
                 <div className="info-field">
