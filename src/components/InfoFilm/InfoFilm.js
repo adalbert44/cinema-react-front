@@ -92,7 +92,9 @@ export default class InfoFilm extends Component {
                     <YouTube
                     videoId={this.state.url_trailer}
                     />
+                    <div className="btn-group">
                     {buttonsDay}
+                    </div>
                     <SessionTable sessions = {this.state.openedSession}/>
                 </div>
             </div>
