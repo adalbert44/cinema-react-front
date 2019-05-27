@@ -2,4 +2,33 @@
     background-color: #ffc822;
     height: 100%;
     width: 100%;
+    margin-top: 0;
+}
+
+.plus-button {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    right: 0;
+    padding: 0;
+    margin-right: 50px;
+    margin-top: 20px;
+
+}
+
+.plus-button img{
+    height: 60px;
+    width: 60px;
+}
+
+.plus-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.postss {
+    padding-top: 70px;
+    margin-left: 50px;
+    margin-right: 50px;
+
 }
