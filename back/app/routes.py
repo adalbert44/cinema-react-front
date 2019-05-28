@@ -602,12 +602,12 @@ def change_personal_info():
 
     users=User.query.filter_by(username=name)
     for u in users:
-        if (u.id != id):
+        if (int(u.id) != int(id)):
             return jsonify({'status': 'ERROR', 'error': 'Was found user with same username'})
 
     users = User.query.filter_by(email=email)
     for u in users:
-        if (u.id != id):
+        if (int(u.id) != int(id)):
             return jsonify({'status': 'ERROR', 'error': 'Was found user with same e-mail'})
 
     user = User.query.get(id)
@@ -623,4 +623,4 @@ def change_personal_info():
     user.photo=photo_url
     user.hash_password(new_password)
 
-    return jsonify({"Status": "OK"})
+    return jsonify({"status": "OK"})

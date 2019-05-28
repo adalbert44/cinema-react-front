@@ -40,8 +40,9 @@ class MainMenu extends Component {
                 .then(curUserID => {
                     this.setState({curUserID:curUserID.ID});
                 })
+        } else
+            this.setState({curUserID: 0});
         }
-    }
 
         render() {
         return (

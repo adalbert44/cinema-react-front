@@ -44,29 +44,35 @@ class EditProfileForm extends PureComponent {
     }
 
     handleSubmit (event) {
-
-/*        fetch("http://127.0.0.1:5000/getToken",
+        console.log(this.props.ID, '!!!!!!!!!!!!!!!!!!');
+        fetch("http://127.0.0.1:5000/change_personal_info",
             {  method: "POST",
                 headers: new Headers({
                     'content-type': 'application/json'
                 }),
                 body: JSON.stringify({
-                    'username': this.state.login,
-                    'password': this.state.password
+                    name: this.state.login,
+                    password: this.state.password,
+                    new_password: this.state.newPassword,
+                    repeat_new_password: this.state.repeatNewPassword,
+                    photo_url: this.state.photoURL,
+                    email: this.state.email,
+                    id: this.props.ID
                 })
             })
             .then(response => response.json())
             .then(data => {
-
-                if (data.token !== '') {
-                    this.props.logIn(data.token);
-                    this.props.endLogIn();
+                console.log(data.status);
+                if (data.status !== "OK") {
+                    this.setState({
+                        warning: data.error
+                    });
                 } else {
-                    this.setState({warning: 'Login or password is not correct'});
+                    this.props.endEditProfile();
                 }
             });
-*/
-        this.props.endEditProfile();
+
+
         event.preventDefault();
     }
 
