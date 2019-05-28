@@ -16,9 +16,9 @@ export default class Comment extends Component {
                     className="Avatar"
                     src={avatar}
                 />
+
                 <div className="Nickname">{this.props.comment.author_username}</div>
                 <p className="Date">{this.props.comment.timestamp}</p>
-                <p className="Rating">{this.props.comment.header}</p>
                 <p className="CommentText">{this.props.comment.body}</p>
             </div>
         )

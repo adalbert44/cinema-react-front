@@ -8,7 +8,6 @@ class Post extends Component {
     constructor(props) {
         super(props);
 
-
         this.delete = this.delete.bind(this);
     }
 
@@ -34,7 +33,7 @@ class Post extends Component {
     render() {
 
         let del;
-        if (this.props.isAuthorized) {
+        if (this.props.canBeEdited) {
             del = <img className="delete-button" src={deleteTex} alt="tutu" onClick={this.delete}/>;
         }
 
