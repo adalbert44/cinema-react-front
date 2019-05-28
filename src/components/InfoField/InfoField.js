@@ -10,79 +10,18 @@ class InfoField extends Component {
         super(props);
 
         this.state = {
-            name: "",
-            photoURL: "",
-            canBeEdited: false
+            name: this.props.name,
+            photoURL: this.props.photoURL,
+            canBeEdited: this.props.canBeEdited
         };
-
-        fetch("http://127.0.0.1:5000/get_user/" + this.props.ID,
-            {
-                method: "POST",
-                headers: new Headers({
-                    'content-type': 'application/json'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                this.setState({
-                    name: data.result.username,
-                    photoURL: data.result.photo
-                });
-            });
-
-        if(this.props.isAuthorized) {
-            fetch("http://127.0.0.1:5000/getCurUserID",
-                {
-                    method: "POST",
-                    headers: new Headers({
-                        'content-type': 'application/json'
-                    }),
-                    body: JSON.stringify({
-                        'token': localStorage.getItem("userToken")
-                    })
-                })
-                .then(response => response.json())
-                .then(curUserID => {
-                    this.setState({canBeEdited:curUserID.ID == this.props.ID});
-                })
-        }
     }
 
     componentWillReceiveProps(nextProps) {
-
-        fetch("http://127.0.0.1:5000/get_user/" + nextProps.ID,
-            {
-                method: "POST",
-                headers: new Headers({
-                    'content-type': 'application/json'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                this.setState({
-                    name: data.result.username,
-                    photoURL: data.result.photo
-                });
-            });
-
-        if(nextProps.isAuthorized) {
-            fetch("http://127.0.0.1:5000/getCurUserID",
-                {
-                    method: "POST",
-                    headers: new Headers({
-                        'content-type': 'application/json'
-                    }),
-                    body: JSON.stringify({
-                        'token': localStorage.getItem("userToken")
-                    })
-                })
-                .then(response => response.json())
-                .then(curUserID => {
-                    this.setState({canBeEdited:curUserID.ID == this.props.ID});
-                })
-        } else
-            this.setState({canBeEdited: 0});
+        this.setState({
+            name: nextProps.name,
+            photoURL: nextProps.photoURL,
+            canBeEdited: nextProps.canBeEdited
+        })
     }
 
     render() {
