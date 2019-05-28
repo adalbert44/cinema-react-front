@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48cf35ff-4672-4b78-ba4f-2d455eaedf3c" name="Default Changelist" comment="test function">
-      <change afterPath="$PROJECT_DIR$/../src/components/AddPostForm/AddPostForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/components/AddPostForm/StyleAddPostForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/components/Post/Post.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/reducers/addPostReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/actions/todoActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/actions/todoActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/InfoField/InfoField.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/InfoField/InfoField.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/Posts/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/Posts/Posts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/Posts/StylePosts.css" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/Posts/StylePosts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/components/UserPage/UserPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/components/UserPage/UserPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/constans.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/constans.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/reducers/rootReducer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="582" column="36" lean-forward="true" selection-start-line="582" selection-start-column="36" selection-end-line="582" selection-end-column="36" />
+            <state relative-caret-position="289">
+              <caret line="112" column="19" lean-forward="true" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
               <folding>
                 <element signature="e#24#111#0" expanded="true" />
               </folding>
@@ -83,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/components/UserPage/UserPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="306">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
@@ -229,7 +217,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.19501625" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.19501625" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -301,20 +289,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.db">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/components/UserPage/UserPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -325,10 +299,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.db">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/components/UserPage/UserPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="582" column="36" lean-forward="true" selection-start-line="582" selection-start-column="36" selection-end-line="582" selection-end-column="36" />
+        <state relative-caret-position="289">
+          <caret line="112" column="19" lean-forward="true" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
           <folding>
             <element signature="e#24#111#0" expanded="true" />
           </folding>
