@@ -53,7 +53,7 @@ export default class InfoFilm extends Component {
         }
 
         return Object.keys(obj);
-    }
+    };
 
     setInfoInTable = (day, sessions) => {
         const openSession = Object.values(sessions).map((session) => {
@@ -67,7 +67,7 @@ export default class InfoFilm extends Component {
             }
         });
         this.setState({openedSession: openSession})
-    }
+    };
 
     render() {
         const sessions = this.state.sessions;
@@ -76,7 +76,7 @@ export default class InfoFilm extends Component {
         days = this.unique(days.map((i) => i.date));
         let buttonsDay = days.map(day => {
             return <button className="btn btn-warning" onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
-        })
+        });
 
         return (
             <div className="InfoFilm">
@@ -87,10 +87,10 @@ export default class InfoFilm extends Component {
                         alt="img">
                     </img>
                     <h2>{this.state.title}</h2>
-                    <p id="Description">Description:{this.state.description}</p>
+                    <p id="Description">{this.state.description}</p>
                 </div>
                 <div className="block-right">
-                    <YouTube
+                    <YouTube className="trailer"
                     videoId={this.state.url_trailer}
                     />
                     <div className="btn-group">

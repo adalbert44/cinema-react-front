@@ -10,27 +10,51 @@ h2{
     color: #ffc822;
 }
 #Description{
-    padding: 5px;
+    text-align: center;
+    padding: 40px;
     color: #ffc822;
     background: black;
 }
 .block-left{
+    position: relative;
     width:35%;
-    height: 110%;
-    oveflow:auto;
+    height: 100%;
+
     float:left;
-    padding: 10px;
+
     background: black;
+    padding-bottom: 20px;
 }
 .block-right{
     width:65%;
-    height: 110%;
-    overflow:auto;
+    height: 100%;
+    float:left;
+    overflow: visible;
     padding: 10px;
 }
 .InfoFilm{
     height: 100%;
     overflow: auto;
     margin-top: 120px;
+    background-image: url("./textures/black.png");
+    background-size: 35% 100000px;
+    background-repeat: no-repeat;
+}
 
+.block-left:after{
+    position: absolute;
+    height: 100%;
+}
+
+.block-right:after{
+    position: absolute;
+    height: 100%;
+}
+
+.trailer{
+    width: 60%;
+    height: 40vh;
+    margin-left: 20%;
+    margin-top: 7%;
+    margin-bottom: 5%;
 }
