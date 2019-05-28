@@ -25,7 +25,6 @@ export default class InfoFilm extends Component {
             .then(response => response.json())
             .then(data => {
                 const filmInfo = data;
-                console.log(data);
                 const comments = Object.assign({}, data.result.comments);
                 const sessions = Object.assign({}, data.result.sessions);
                 if (filmInfo !== undefined){
@@ -78,12 +77,12 @@ export default class InfoFilm extends Component {
         let buttonsDay = days.map(day => {
             return <button className="btn btn-warning" onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
         })
+
         return (
             <div className="InfoFilm">
                 <div className="block-left">
                     <img
-                        className='Poster'
-                        id = 'img'
+                        className='PosterInInfo'
                         src={this.state.url_picture}
                         alt="img">
                     </img>
