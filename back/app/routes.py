@@ -624,3 +624,22 @@ def change_personal_info():
     user.hash_password(new_password)
 
     return jsonify({"status": "OK"})
+
+@app.route("/del_post", methods=["GET","POST"])
+@cross_origin()
+def del_post():
+    user_id = int(request.json.get('user_id'))
+    post_id = int(request.json.get('post_id'))
+    #user = User.query.get(user_id)
+
+    post = Post.query.filter_by(id=post_id).first()
+    if post is None:
+        return jsonify({"status": "ERROR", "error":"post with id={} was not found".format(post_id)})
+    if user_id != post.user_id:
+        return jsonify({"status": "ERROR",
+                        "error": "user with id={0} does not have post with id={1}".format(user_id, post_id)})
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return jsonify({"status": "OK"})
