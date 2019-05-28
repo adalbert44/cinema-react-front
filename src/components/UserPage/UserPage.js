@@ -96,14 +96,13 @@ class UserPage extends Component {
 
 
     render() {
-
         return (
             <div className="full-screen">
                 <div className="info-field">
                     <InfoField name={this.state.name} photoURL={this.state.photoURL} canBeEdited={this.state.canBeEdited} ID={this.props.match.params.id}/>
                 </div>
                 <div className="posts">
-                    <Posts posts={this.state.posts} canBeEdited={this.state.canBeEdited} ID={this.props.match.params.id}/>
+                    <Posts posts={this.state.posts} canBeEdited={this.state.canBeEdited} ID={this.props.match.params.id} update={this.update.bind(this)}/>
                 </div>
                 {this.props.editingStarted && <EditProfileForm ID={this.props.match.params.id}/>}
                 {this.props.addingPostStarted && <AddPostForm ID={this.props.match.params.id}/>}

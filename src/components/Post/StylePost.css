@@ -28,6 +28,10 @@
     float:right;
 }
 
+.delete-button:hover {
+    cursor: pointer;
+}
+
 .time {
     width: 100%;
     text-align: center;
