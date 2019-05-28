@@ -4,6 +4,7 @@ import YouTube from "react-youtube";
 import './StyleInfoFilm.css'
 import '../SessionsTable/SessionTable'
 import SessionTable from "../SessionsTable/SessionTable";
+import CommentsField from '../CommentsField/CommentsField'
 
 export default class InfoFilm extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ export default class InfoFilm extends Component {
                 const filmInfo = data;
                 const comments = Object.assign({}, data.result.comments);
                 const sessions = Object.assign({}, data.result.sessions);
-
+                console.log(data);
                 if (filmInfo !== undefined){
                     this.setState({
                         comments: comments,
@@ -84,9 +85,9 @@ export default class InfoFilm extends Component {
         let width = 100.0/days.length;
         let buttonsDay = days.map(day => {
             if (day === this.state.chosenDay) {
-                return <button className="btn btn-warning" style={{fontWeight:"500", width:width + "%", height: 60 + "px", overflow: "hidden", backgroundColor: "#FF7C22"}} onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
+                return <button className="btn btn-warning ChooseDate" style={{width:width + "%", backgroundColor: "#FF7C22"}} onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
             } else {
-                return <button className="btn btn-warning" style={{fontWeight:"500", width:width + "%", height: 60 + "px", overflow: "hidden"}} onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
+                return <button className="btn btn-warning ChooseDate" style={{width:width + "%"}} onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
             }
         });
 
@@ -109,6 +110,7 @@ export default class InfoFilm extends Component {
                     {buttonsDay}
                     </div>
                     <SessionTable sessions = {this.state.openedSession}/>
+                    <CommentsField comments={this.state.comments}/>
                 </div>
             </div>
         )

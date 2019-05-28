@@ -1,0 +1,30 @@
+.Avatar{
+    display: block;
+    float:left;
+    height: 5vw;
+    weight: 5vw;
+    background-image: url("../textures/defaultAvatar.jpg");
+    margin: 3px;
+}
+.Nickname{
+    font-weight: bold;
+    font-size: 15pt;
+
+}
+.Date{
+    font-size: 8pt;
+}
+.Rating{
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.CommentText{
+    
+}
+.Comment{
+    background: #FF7C22;
+    margin: 3px;
+    padding: 4px;
+}
