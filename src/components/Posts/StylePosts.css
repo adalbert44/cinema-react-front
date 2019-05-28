@@ -8,8 +8,8 @@
 
 .plus-button {
     position: absolute;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     right: 0;
     padding: 0;
     margin-right: 50px;
@@ -19,8 +19,8 @@
 
 .plus-button img{
     margin-top: 10px;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
 }
 
 .plus-button:hover {
@@ -30,6 +30,6 @@
 
 .postss {
     padding-top: 70px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 70px;
+    margin-right: 70px;
 }

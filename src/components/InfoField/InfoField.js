@@ -27,7 +27,7 @@ class InfoField extends Component {
     render() {
         return (
             <div className="info-fieldd">
-                <div className="profile-photo" src={this.state.photoURL} alt=""/>
+                <img className="profile-photo" src={this.state.photoURL} alt=""/>
                 {this.state.canBeEdited ? (
                     <div className="edit-button" onClick={this.props.startEditProfile}> <img alt="tutu" src={editTex}/></div>
                 ) : (

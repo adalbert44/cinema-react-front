@@ -24,7 +24,6 @@ class Posts extends Component {
 
 
     render() {
-        console.log(this.state.canBeEdited, '@@@@@');
         let htmlPosts = [];
 
         for (let i = this.state.posts.length -  1; i >= 0; i--) {
