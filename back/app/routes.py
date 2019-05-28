@@ -425,6 +425,7 @@ def get_film(id):
             'id': comment.id,
             'author_id': comment.author_id,
             'url_photo_author': User.query.get(comment.author_id).photo,
+            'author_username': User.query.get(comment.author_id).username,
             'film_id': comment.film_id,
             'header': comment.header,
             'body': comment.body,
