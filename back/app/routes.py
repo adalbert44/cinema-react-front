@@ -50,7 +50,7 @@ def encode_auth_token(user_id):
     """
     try:
         payload = {
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=500),
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=50000),
             'iat': datetime.datetime.utcnow(),
             'ID': user_id
         }
@@ -424,6 +424,7 @@ def get_film(id):
         film_comments.append({
             'id': comment.id,
             'author_id': comment.author_id,
+            'url_photo_author': User.query.get(comment.author_id).photo,
             'film_id': comment.film_id,
             'header': comment.header,
             'body': comment.body,
