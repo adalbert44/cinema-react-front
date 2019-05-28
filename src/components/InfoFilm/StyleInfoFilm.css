@@ -12,15 +12,19 @@ h2{
 }
 .block-left{
     width:35%;
-    height:800px;
-    overflow:auto;
+    height: 100%;
+
+    oveflow:auto;
     float:left;
     padding: 10px;
     background: black;
 }
 .block-right{
     width:65%;
-    height:800px;
+    height: 100%;
     overflow:auto;
     padding: 10px;
+}
+.InfoFilm{
+    height: 100%;
 }
