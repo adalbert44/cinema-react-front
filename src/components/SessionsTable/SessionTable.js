@@ -35,7 +35,7 @@ export default class SessionTable extends Component {
                     {rows}
                 </table>
             </div>
-        )
+        );
         if (rows.length == 1) Table ='';
         return (
             <div>

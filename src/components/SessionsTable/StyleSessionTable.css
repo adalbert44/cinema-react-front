@@ -1,8 +1,6 @@
 table{
     border: 3px;
-    cellpadding: 1px;
-    cellspacing: 1px;
-    bordercolor: yellow;
+    font-weight: 500;
 }
 .fadeIn {
     -webkit-animation-name: fadeIn;

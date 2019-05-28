@@ -7,7 +7,7 @@ import SessionTable from "../SessionsTable/SessionTable";
 
 export default class InfoFilm extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             comments: [{}],
@@ -74,8 +74,9 @@ export default class InfoFilm extends Component {
         let days = Object.values(sessions);
         days = days.sort((a,b) => ((+a.date.substr(0,2))-(+b.date.substr(0,2))));
         days = this.unique(days.map((i) => i.date));
+        let width = 100.0/days.length;
         let buttonsDay = days.map(day => {
-            return <button className="btn btn-warning" onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
+            return <button className="btn btn-warning" style={{fontWeight:"500", width:width + "%", height: 60 + "px"}} onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
         });
 
         return (
@@ -93,7 +94,7 @@ export default class InfoFilm extends Component {
                     <YouTube className="trailer"
                     videoId={this.state.url_trailer}
                     />
-                    <div className="btn-group">
+                    <div className="btn-group" style={{width: 100 + "%"}}>
                     {buttonsDay}
                     </div>
                     <SessionTable sessions = {this.state.openedSession}/>

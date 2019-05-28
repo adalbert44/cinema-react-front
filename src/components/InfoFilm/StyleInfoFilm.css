@@ -1,8 +1,12 @@
 .PosterInInfo{
     display:block;
-    margin:5px auto;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+
     text-align:center;
-    border-radius: 40px;
+    border-radius: 30px;
     height: 30vw;
 }
 h2{
@@ -19,9 +23,7 @@ h2{
     position: relative;
     width:35%;
     height: 100%;
-
     float:left;
-
     background: black;
     padding-bottom: 20px;
 }
@@ -36,6 +38,7 @@ h2{
     height: 100%;
     overflow: auto;
     margin-top: 120px;
+    margin-bottom: 60px;
     background-image: url("./textures/black.png");
     background-size: 35% 100000px;
     background-repeat: no-repeat;
@@ -52,7 +55,8 @@ h2{
 }
 
 .trailer{
-    width: 60%;
+
+
     height: 40vh;
     margin-left: 20%;
     margin-top: 7%;
