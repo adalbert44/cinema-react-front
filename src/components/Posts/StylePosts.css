@@ -2,8 +2,8 @@
     background-color: #ffc822;
     height: 100%;
     width: 100%;
-    margin-top: 0;
-    overflow-y: scroll;
+    margin-top: 65px;
+    overflow-y: auto;
 }
 
 .plus-button {
@@ -13,11 +13,12 @@
     right: 0;
     padding: 0;
     margin-right: 50px;
-    margin-top: 20px;
+    margin-top: 0px;
 
 }
 
 .plus-button img{
+    margin-top: 10px;
     height: 60px;
     width: 60px;
 }
@@ -31,5 +32,4 @@
     padding-top: 70px;
     margin-left: 50px;
     margin-right: 50px;
-
 }

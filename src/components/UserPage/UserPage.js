@@ -22,7 +22,7 @@ class UserPage extends Component {
                 <div className="info-field">
                     <InfoField ID={this.props.match.params.id}/>
                 </div>
-                <div className="posts">ò
+                <div className="posts">
                     <Posts ID={this.props.match.params.id}/>
                 </div>
                 {this.props.editingStarted && <EditProfileForm ID={this.props.match.params.id}/>}
