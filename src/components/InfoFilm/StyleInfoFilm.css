@@ -9,11 +9,11 @@ h2{
 #Description{
     padding: 5px;
     color: #ffc822;
+    background: black;
 }
 .block-left{
     width:35%;
-    height: 100%;
-
+    height: 110%;
     oveflow:auto;
     float:left;
     padding: 10px;
@@ -21,10 +21,13 @@ h2{
 }
 .block-right{
     width:65%;
-    height: 100%;
+    height: 110%;
     overflow:auto;
     padding: 10px;
 }
 .InfoFilm{
     height: 100%;
+    overflow: auto;
+    margin-top: 120px;
+
 }
