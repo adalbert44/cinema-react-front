@@ -29,7 +29,7 @@ class InfoField extends Component {
                     name: data.result.username,
                     photoURL: data.result.photo
                 });
-            })
+            });
 
         if(this.props.isAuthorized) {
             fetch("http://127.0.0.1:5000/getCurUserID",

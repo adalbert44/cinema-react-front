@@ -6,3 +6,5 @@ export const START_SIGN_UP = 'START_SIGN_UP';
 export const END_SIGN_UP = 'END_SIGN_UP';
 export const START_EDIT_PROFILE = 'START_EDIT_PROFILE';
 export const END_EDIT_PROFILE = 'END_EDIT_PROFILE';
+export const START_ADD_POST = 'START_ADD_POST';
+export const END_ADD_POST = 'END_ADD_POST';

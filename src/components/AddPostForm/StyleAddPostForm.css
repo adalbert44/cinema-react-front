@@ -1,0 +1,41 @@
+.add-post-form {
+    padding-top: 40px;
+    padding-right: 80px;
+    padding-left: 80px;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    /* центрирование */
+
+    margin: auto;
+    /* центрирование */
+
+    height: 550px;
+    width: 600px;
+
+    background: white no-repeat;
+}
+.post-body {
+    height: 300px;
+}
+
+textarea {
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.add-post-form .submit-button {
+    position: absolute;
+    bottom: 20px;
+    left: 250px;
+    width: 100px;
+    height: 50px;
+
+    border-radius: 8px;
+    z-index: 2;
+}

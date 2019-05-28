@@ -1,4 +1,12 @@
-import {LOG_IN, LOG_OUT, START_LOGIN, END_LOGIN, START_SIGN_UP, END_SIGN_UP, START_EDIT_PROFILE, END_EDIT_PROFILE} from '../constans'
+import {LOG_IN, LOG_OUT, START_LOGIN, END_LOGIN, START_SIGN_UP, END_SIGN_UP, START_EDIT_PROFILE, END_EDIT_PROFILE, START_ADD_POST, END_ADD_POST} from '../constans'
+
+export const startAddPost = () => {
+    return {type: START_ADD_POST};
+};
+
+export const endAddPost = () => {
+    return {type: END_ADD_POST};
+};
 
 export const startEditProfile = () => {
     return {type: START_EDIT_PROFILE};

@@ -4,6 +4,7 @@ import Posts from "../Posts/Posts";
 import "./StyleUserPage.css"
 import {connect} from "react-redux";
 import EditProfileForm from "../EditProfileForm/EditProfileForm"
+import AddPostForm from "../AddPostForm/AddPostForm";
 
 
 class UserPage extends Component {
@@ -15,16 +16,17 @@ class UserPage extends Component {
     }
 
     render() {
-        
+
         return (
             <div className="full-screen">
                 <div className="info-field">
                     <InfoField ID={this.props.match.params.id}/>
                 </div>
-                <div className="posts">
-                    <Posts/>
+                <div className="posts">ò
+                    <Posts ID={this.props.match.params.id}/>
                 </div>
                 {this.props.editingStarted && <EditProfileForm ID={this.props.match.params.id}/>}
+                {this.props.addingPostStarted && <AddPostForm ID={this.props.match.params.id}/>}
             </div>
         )
     }
@@ -33,6 +35,7 @@ class UserPage extends Component {
 function mapStateToProps(state) {
     return {
         editingStarted: state.editProfileWindow.editingStarted,
+        addingPostStarted: state.addPostWindow.addingPostStarted,
     }
 }
 
