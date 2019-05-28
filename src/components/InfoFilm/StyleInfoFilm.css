@@ -16,13 +16,11 @@ h2{
     overflow:auto;
     float:left;
     padding: 10px;
+    background: black;
 }
 .block-right{
     width:65%;
     height:800px;
     overflow:auto;
     padding: 10px;
-}
-.InfoFilm{
-    background: url(../textures/FilmInfoPageBackground.png) no-repeat center center fixed;
 }
