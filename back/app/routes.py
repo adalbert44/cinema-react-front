@@ -587,3 +587,40 @@ def clear_comments():
     db.session.query(Comment).delete()
     db.session.commit()
     return 'ok_clear_comments'
+
+
+@app.route("/change_personal_info", methods=["GET","POST"])
+@cross_origin()
+def change_personal_info():
+    name=request.json.get('name')
+    password=request.json.get('password')
+    new_password = request.json.get('new_password')
+    repeat_new_password = request.json.get('repeat_new_password')
+    photo_url = request.json.get('photo_url')
+    email = request.json.get('email')
+    id = request.json.get('id')
+
+    users=User.query.filter_by(username=name)
+    for u in users:
+        if (u.id != id):
+            return jsonify({'status': 'ERROR', 'error': 'Was found user with same username'})
+
+    users = User.query.filter_by(email=email)
+    for u in users:
+        if (u.id != id):
+            return jsonify({'status': 'ERROR', 'error': 'Was found user with same e-mail'})
+
+    user = User.query.get(id)
+    if (not user.verify_password(password)):
+        return jsonify({'status': 'ERROR', 'error': 'Wrong password'})
+
+    if (new_password != repeat_new_password):
+        return jsonify({'status': 'ERROR', 'error': 'Password must be same'})
+
+    #Change_info
+    user.username=name
+    user.email=email
+    user.photo=photo_url
+    user.hash_password(new_password)
+
+    return jsonify({"Status": "OK"})
