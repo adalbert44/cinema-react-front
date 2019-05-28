@@ -27,7 +27,7 @@ class Posts extends Component {
         let htmlPosts = [];
 
         for (let i = this.state.posts.length -  1; i >= 0; i--) {
-            htmlPosts.push(<Post info={this.state.posts[i]}/>)
+            htmlPosts.push(<Post info={this.state.posts[i]} update={this.props.update} ID={this.props.ID}/>)
         }
         let edit;
         if (this.state.canBeEdited)
