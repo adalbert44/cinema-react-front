@@ -27,6 +27,7 @@ export default class InfoFilm extends Component {
                 const filmInfo = data;
                 const comments = Object.assign({}, data.result.comments);
                 const sessions = Object.assign({}, data.result.sessions);
+
                 if (filmInfo !== undefined){
                     this.setState({
                         comments: comments,
@@ -35,11 +36,16 @@ export default class InfoFilm extends Component {
                         title: filmInfo.result.title,
                         url_picture: filmInfo.result.url_picture,
                         url_trailer: filmInfo.result.url_trailer,
-
+                        chosenDay: 0
                     })
 
                 }
 
+                let days = Object.values(sessions);
+                days = days.sort((a,b) => ((+a.date.substr(0,2))-(+b.date.substr(0,2))));
+                days = this.unique(days.map((i) => i.date));
+
+                this.setInfoInTable(days[0], sessions);
             });
 
     }
@@ -66,7 +72,8 @@ export default class InfoFilm extends Component {
                 return a.time.substr(0,2) - b.time.substr(0,2);
             }
         });
-        this.setState({openedSession: openSession})
+        this.setState({openedSession: openSession,
+                             chosenDay: day})
     };
 
     render() {
@@ -76,7 +83,11 @@ export default class InfoFilm extends Component {
         days = this.unique(days.map((i) => i.date));
         let width = 100.0/days.length;
         let buttonsDay = days.map(day => {
-            return <button className="btn btn-warning" style={{fontWeight:"500", width:width + "%", height: 60 + "px"}} onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
+            if (day === this.state.chosenDay) {
+                return <button className="btn btn-warning" style={{fontWeight:"500", width:width + "%", height: 60 + "px", overflow: "hidden", backgroundColor: "#FF7C22"}} onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
+            } else {
+                return <button className="btn btn-warning" style={{fontWeight:"500", width:width + "%", height: 60 + "px", overflow: "hidden"}} onClick={() => this.setInfoInTable(day,sessions)}>{day}</button>
+            }
         });
 
         return (
