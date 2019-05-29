@@ -1,3 +1,5 @@
+Link to the presentation: https://prezi.com/view/37DqwBJ37wA1WfcwIU3R/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
