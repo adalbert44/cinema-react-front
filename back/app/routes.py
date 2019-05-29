@@ -573,6 +573,7 @@ def add_comment(id):
     header_comment = request.json.get('header')
     body_comment = request.json.get('body')
     author_id_comment = request.json.get('author_id')
+    print(author_id_comment)
 
     film = Film.query.get(id)
     user = User.query.get(author_id_comment)

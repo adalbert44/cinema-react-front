@@ -3,5 +3,10 @@
 }
 .CommentsField{
     display: block;
+    margin: 10px 10px 10px 5px;
+}
+
+.add-comment{
+    margin-left: 20px;
     margin-bottom: 60px;
 }

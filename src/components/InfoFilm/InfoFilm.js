@@ -17,7 +17,7 @@ export default class InfoFilm extends Component {
             title: '',
             url_picture: '',
             url_trailer: '',
-            openedSession: [{}]
+            openedSession: [{}],
         }
     }
 
@@ -48,7 +48,35 @@ export default class InfoFilm extends Component {
 
                 this.setInfoInTable(days[0], sessions);
             });
+    }
 
+    update() {
+        fetch('http://127.0.0.1:5000/get_film/' + this.props.match.params.id)
+            .then(response => response.json())
+            .then(data => {
+                const filmInfo = data;
+                const comments = Object.assign({}, data.result.comments);
+                const sessions = Object.assign({}, data.result.sessions);
+                console.log(data);
+                if (filmInfo !== undefined){
+                    this.setState({
+                        comments: comments,
+                        description: filmInfo.result.description,
+                        sessions: sessions,
+                        title: filmInfo.result.title,
+                        url_picture: filmInfo.result.url_picture,
+                        url_trailer: filmInfo.result.url_trailer,
+                        chosenDay: 0
+                    })
+
+                }
+
+                let days = Object.values(sessions);
+                days = days.sort((a,b) => ((+a.date.substr(0,2))-(+b.date.substr(0,2))));
+                days = this.unique(days.map((i) => i.date));
+
+                this.setInfoInTable(days[0], sessions);
+            });
     }
 
     unique = (arr) => {
@@ -110,11 +138,10 @@ export default class InfoFilm extends Component {
                     {buttonsDay}
                     </div>
                     <SessionTable sessions = {this.state.openedSession}/>
-                    <CommentsField comments={this.state.comments}/>
+                    <CommentsField comments={this.state.comments} update={this.update.bind(this)} ID={this.props.match.params.id}/>
                 </div>
             </div>
         )
-
 
     }
 
