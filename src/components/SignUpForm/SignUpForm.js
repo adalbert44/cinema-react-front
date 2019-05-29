@@ -80,7 +80,7 @@ class SignUpForm extends PureComponent {
                 <div className="dark-background" onClick={this.props.endSignUp}/>
                 {this.state.registered ? (
                     <div className="ok-message">
-                        registration is successful, verify your e-mail
+                        registration is successful
                     </div>
                 ) : (
                     <form className="sign-up-form" onSubmit={this.handleSubmit}>
